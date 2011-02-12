@@ -3,7 +3,7 @@ package reservationsystem
 class Person {
 
   String name
-  security.UserLogin userLogin
+  SecUser userLogin
 
   static belongsTo = [Account]
 

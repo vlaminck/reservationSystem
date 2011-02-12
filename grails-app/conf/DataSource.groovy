@@ -17,12 +17,12 @@ environments {
         dbCreate = "create-drop" // one of 'create', 'create-drop','update'
         url = "jdbc:hsqldb:mem:devDB"
       } else {
-        dbCreate = "update"
-        url = "jdbc:mysql://localhost/leanto"
+        dbCreate = "create-drop"
+        url = "jdbc:mysql://localhost/res_system"
         driverClassName = "com.mysql.jdbc.Driver"
-        username = "leanto"
-        password = "leanto"
-        //dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+        username = "res_system"
+        password = "r3s3rv4t10n"
+//        dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
       }
     }
   }
