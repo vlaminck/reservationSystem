@@ -2,6 +2,10 @@ package reservationsystem
 
 class Reservation {
 
-    static constraints = {
-    }
+  Media media
+
+  static belongsTo = [ReservationList]
+
+  static constraints = {
+  }
 }
