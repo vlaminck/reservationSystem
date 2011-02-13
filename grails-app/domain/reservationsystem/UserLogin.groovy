@@ -1,6 +1,6 @@
 package reservationsystem
 
-class SecUser {
+class UserLogin {
 
 	String username
 	String password

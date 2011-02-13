@@ -89,11 +89,14 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'reservationsystem.SecUser'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'reservationsystem.SecUserSecRole'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'reservationsystem.UserLogin'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'reservationsystem.UserLoginSecRole'
 grails.plugins.springsecurity.authority.className = 'reservationsystem.SecRole'
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
-        '/tmp/*': ['ROLE_USER'],
+        '/account/index': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/account/create': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/account/save': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/account/**': ['ROLE_USER'],
         '/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
