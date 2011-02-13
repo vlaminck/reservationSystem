@@ -5,12 +5,26 @@
   <meta name="layout" content="main"/>
 </head>
 <body>
-<g:form name="createForm" method="post" controller="account" action="save" >
-  First name:<input type="text" name="firstName" />
-  Last name:<input type="text" name="lastName" />
-  Email:<input type="email" name="email" />
-  Password:<input type="password" name="password" />
-  <input type="submit" value="Submit" />
-</g:form>
+<div id="wrapper">
+  <g:form name="createForm" method="post" controller="account" action="save">
+    First name:
+    <br/>
+    <input type="text" name="firstName"/>
+    <br/>
+    Last name:
+    <br/>
+    <input type="text" name="lastName"/>
+    <br/>
+    Email:
+    <br/>
+    <input type="email" name="email"/>
+    <br/>
+    Password:
+    <br/>
+    <input type="password" name="password"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+  </g:form>
+</div>
 </body>
 </html>
