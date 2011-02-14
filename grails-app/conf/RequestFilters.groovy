@@ -13,15 +13,15 @@ class RequestFilters {
                 println "[${new Date()}] Request for ${controllerName}/${actionName} from RemoteUser: ${request.remoteUser}"
 
                 if (springSecurityService.isLoggedIn()) {
-                  def principal = springSecurityService.getPrincipal()
+                  def userDetails = springSecurityService.principal
 
-                  if (principal?.id) {
-                    def userLogin = UserLogin.get(principal?.id)
+                  if(userDetails?.id) {
+                    def userLogin = UserLogin.get(userDetails?.id)
                     if (userLogin) {
                       Person.currentUser = Person.findByUserLogin(userLogin)
                     }
                     else {
-                      log.warn("Found principal: ${principal} with no userLogin for ID: ${principal?.id}")
+                      log.warn("Found UserDetails: ${userDetails} with no userLogin for ID: ${userDetails?.id}")
                     }
 
                   }
