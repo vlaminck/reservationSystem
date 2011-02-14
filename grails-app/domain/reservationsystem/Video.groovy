@@ -2,15 +2,15 @@ package reservationsystem
 
 class Video extends Media {
 
-  String Artist
-  String Producer
-  String Director
+  String artist
+  String producer
+  String director
   Long runTime
 
   static constraints = {
-    Artist(nullable: false, blank: false)
-    Producer(nullable: true, blank: true)
-    Director(nullable: true, blank: true)
+    artist(nullable: false, blank: false)
+    producer(nullable: true, blank: true)
+    director(nullable: true, blank: true)
     runTime(nullable: true)
   }
 }

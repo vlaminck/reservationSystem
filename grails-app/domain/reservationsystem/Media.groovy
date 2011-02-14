@@ -3,7 +3,7 @@ package reservationsystem
 class Media {
 
   MediaType type
-  String format
+  MediaFormat format
   String title
   String description
   Boolean isAvailable = true
@@ -18,6 +18,15 @@ class Media {
 }
 
 enum MediaType {
-  PRINT, VIDEO, AuDIO
+  PRINT, VIDEO, AUDIO
+}
+
+enum MediaFormat {
+// PRINT
+  PAPER, EPUB,
+// AUDIO
+  CD, MP3,
+// VIDEO
+  DVD, AVI
 }
 

@@ -13,6 +13,7 @@ class BootStrap {
       println ' --- --- --- '
 
       createUsers()
+      createMedia()
 
     }
     else {
@@ -123,8 +124,59 @@ class BootStrap {
     steveAccount.owner = stevePerson
     saveDomain(steveAccount)
     saveDomain(stevePerson)
+  }
 
-    
+  def createMedia() {
+// Needed for Media
+//    MediaType type
+//    MediaFormat format
+//    String title
+// Optional for Media
+//    String description
+
+// Needed for Print
+//    String author
+// Optional for Print
+//    String description
+//    String isbn
+
+// Needed for Audio
+//    String artist
+// Optional for Audio
+//    String producer
+//    Long length
+
+// Needed for Video
+//    String artist
+// Optional for Video
+//    String producer
+//    String director
+//    Long runTime
+
+    // TODO: Create Print
+    saveDomain(new Print(
+            type: MediaType.PRINT,
+            format: MediaFormat.EPUB,
+            title: "The Hitchhiker's Guide to the Galaxy",
+            author: 'Douglas Adams'
+    ))
+
+    // TODO: Create Audio
+    saveDomain(new Audio(
+            type: MediaType.AUDIO,
+            format: MediaFormat.MP3,
+            title: "In Rainbows",
+            artist: 'Radiohead'
+    ))
+
+    // TODO: Create Video
+    saveDomain(new Video(
+            type: MediaType.VIDEO,
+            format: MediaFormat.AVI,
+            title: "Arrested Development",
+            artist: 'Mitchell Hurwitz'
+    ))
+
 
   }
 
