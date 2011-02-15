@@ -301,11 +301,13 @@ th.desc a {
 
 #header {
     position: fixed;
-    height: 10%;
+    height: 60px;
     width: 100%;
     background-color:gray;
     border-bottom: solid 2px;
     z-index:1;
+    min-width: 500px;
+    top: 0;
 }
 
 #LRS_Logo {
@@ -319,9 +321,33 @@ th.desc a {
 #side {
     position: fixed;
     height: 100%;
-    width: 20%;
+    width: 240px;
     background-color:lightgray;
-    border-right: solid 2px
+    border-right: solid 2px;
+    min-width:200px;
+    left: 0;
+}
+
+#side .search {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    top: 20%;
+    left: 10%;
+}
+
+#side .search input {
+    position: relative;
+    left: 25px;
+}
+
+#wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    top: 62px;
+    left: 242px;
+    padding: 20px;
 }
 
 #wrapper form {

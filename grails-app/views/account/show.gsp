@@ -5,8 +5,10 @@
   <meta name="layout" content="main"/>
 </head>
 <body>
+<div id="wrapper">
 Hello ${currentUser.firstName} ${currentUser.lastName},
 <br />
 Your account id is ${account.id}
+</div>
 </body>
 </html>
