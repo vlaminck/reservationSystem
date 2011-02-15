@@ -1,25 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <title>Create an Account</title>
+  <title>Update your Account</title>
   <meta name="layout" content="main"/>
 </head>
 <body>
 <div id="wrapper">
-  <g:form name="createForm" method="post" controller="account" action="createAccount">
+  <g:form name="createForm" method="post" controller="account" action="save">
     First name:
     <br/>
-    <input type="text" name="firstName"/>
+    <input type="text" name="firstName" value="${person.firstName}"/>
     <br/>
     Last name:
     <br/>
-    <input type="text" name="lastName"/>
+    <input type="text" name="lastName" value="${person.lastName}"/>
     <br/>
-    Email:
-    <br/>
-    <input type="email" name="email"/>
-    <br/>
-    Password:
+    <input type="hidden" name="email" value="${person.email}"/>
+    Please enter your password:
     <br/>
     <input type="password" name="password"/>
     <br/>

@@ -96,7 +96,7 @@ grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptU
 grails.plugins.springsecurity.interceptUrlMap = [
         '/account/index': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/account/create': ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/account/save': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/account/createAccount': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/account/**': ['ROLE_USER'],
         '/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
