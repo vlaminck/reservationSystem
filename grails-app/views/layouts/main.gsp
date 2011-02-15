@@ -11,7 +11,8 @@
 <div id="spinner" class="spinner" style="display:none;">
   <img src="${resource(dir: 'images', file: 'spinner.gif')}" alt="${message(code: 'spinner.alt', default: 'Loading...')}"/>
 </div>
-<div id="LRS_Logo">Library ReservationSystem</div>
+<div id="header"><g:render template="/header" /></div>
+<div id="side"><g:render template="/side" /></div>
 <g:layoutBody/>
 </body>
 </html>

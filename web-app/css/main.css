@@ -299,11 +299,29 @@ th.desc a {
     padding-left: 28px;
 }
 
+#header {
+    position: fixed;
+    height: 10%;
+    width: 100%;
+    background-color:gray;
+    border-bottom: solid 2px;
+    z-index:1;
+}
+
 #LRS_Logo {
-    font-size:30px;
-    font-color:#666;
+    font-size: 30px;
+    font-color: #666;
     text-align: center;
     margin: 10px;
+    color: white;
+}
+
+#side {
+    position: fixed;
+    height: 100%;
+    width: 20%;
+    background-color:lightgray;
+    border-right: solid 2px
 }
 
 #wrapper form {

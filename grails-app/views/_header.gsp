@@ -1,0 +1,1 @@
+<div id="LRS_Logo">Library ReservationSystem</div>
