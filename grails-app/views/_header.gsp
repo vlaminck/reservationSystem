@@ -1,2 +1,5 @@
-<div id="LRS_Logo">Library ReservationSystem</div>
-<g:link class="nav" controller="account" action="show">My Account</g:link>
+<div class="left"></div>
+<div class="right">
+  <div id="LRS_Logo">Library ReservationSystem</div>
+  <g:link class="nav" controller="account" action="show">My Account</g:link>
+</div>
