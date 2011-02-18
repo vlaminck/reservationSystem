@@ -71,7 +71,7 @@
       <div class='fheader'>Please Login..</div>
       <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
         <p>
-          <label for='username'>Login ID</label>
+          <label for='username'>Email</label>
           <input type='text' class='text_' name='j_username' id='username'/>
         </p>
         <p>

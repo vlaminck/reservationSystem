@@ -8,7 +8,7 @@ class Video extends Media {
   Long runTime
 
   static constraints = {
-    artist(nullable: false, blank: false)
+    artist(nullable: true, blank: false)
     producer(nullable: true, blank: true)
     director(nullable: true, blank: true)
     runTime(nullable: true)
