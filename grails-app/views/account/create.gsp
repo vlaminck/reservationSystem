@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-  <g:form name="createForm" method="post" controller="account" action="createAccount">
+  <g:form name="createForm" method="post" controller="account" action="createAccount" class="account">
     First name:
     <br/>
     <input type="text" name="firstName"/>
