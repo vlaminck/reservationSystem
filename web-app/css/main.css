@@ -334,21 +334,50 @@
     height: 400px;
     width: 100%;
     top: 20%;
-    left: 10%;
+    /*left: 10%;*/
 }
 
 #side .search input {
     position: relative;
-    left: 25px;
+    left: 0px;
+}
+
+#side .search ul {
+    position: relative;
+    list-style-type: none;
+    padding: 4px;
+    width: 215px;
+}
+
+#side .search li {
+    position: relative;
+    list-style-type: none;
+    display: inline-block;
+    /*font-size: 14px;*/
+}
+
+/*#side .search ul.filters {*/
+    /*position: relative;*/
+    /*background: white;*/
+/*}*/
+
+/*#side .search ul.filters li {*/
+    /*position: relative;*/
+    /*background: blue;*/
+/*}*/
+
+#side .search ul.filters input {
+    position: relative;
 }
 
 #wrapper {
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 75%;
     top: 62px;
     left: 242px;
     padding: 20px;
+    overflow-x:hidden;
 }
 
 #wrapper form.account {
@@ -418,21 +447,21 @@
 }
 
 /*#header .left {*/
-    /*position: relative;*/
-    /*background: gray url('../images/diamond.png') top left;*/
-    /*min-width: 200px;*/
-    /*width: 240px;*/
-    /*border-right: 2px solid;*/
-    /*border-bottom: 2px solid;*/
-    /*height: 100%;*/
+/*position: relative;*/
+/*background: gray url('../images/diamond.png') top left;*/
+/*min-width: 200px;*/
+/*width: 240px;*/
+/*border-right: 2px solid;*/
+/*border-bottom: 2px solid;*/
+/*height: 100%;*/
 /*}*/
 
 /*#header .right {*/
-    /*position: absolute;*/
-    /*height: 100%;*/
-    /*width: 100%;*/
-    /*border-left:2px solid;*/
-    /*top: 0px;*/
+/*position: absolute;*/
+/*height: 100%;*/
+/*width: 100%;*/
+/*border-left:2px solid;*/
+/*top: 0px;*/
 /*}*/
 
 /* ----- ALT DESIGN --------
@@ -485,3 +514,22 @@
 
 
 /* */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
