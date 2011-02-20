@@ -518,16 +518,28 @@ ul.resultsList {
     width: 100%;
 }
 
+ul.resultsList li.header {
+    position: relative;
+    width: 100%;
+    margin: 20px;
+    border-bottom: 1px solid;
+    list-style-type: none;
+}
+
 ul.resultsList li.artist {
     position: relative;
     display: inline-block;
     width: 25%;
+    left: 40px;
 }
+
 ul.resultsList li.title {
     position: relative;
     display: inline-block;
     width: 65%;
+    left: 40px;
 }
+
 
 
 

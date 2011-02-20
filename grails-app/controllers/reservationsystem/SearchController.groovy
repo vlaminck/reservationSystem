@@ -39,27 +39,30 @@ class SearchController {
     def searchResults = []
     filteredResults.each { media ->
       searchTerms.each { term ->
-        if (media.title?.contains(term) || media.artist?.contains(term)) searchResults << media
+        if (media.title?.toLowerCase()?.contains(term.toLowerCase()) || media.artist?.toLowerCase()?.contains(term.toLowerCase())) {
+          searchResults << media
+        }
       }
     }
 
     searchResults = searchResults.unique {a, b -> a.title <=> b.title}
 
-//    params.type?.each {
-//      def tempResults = Media.findAllByType(MediaType."${it}")
-//      searchResults += tempResults*.title
-//    }
-//
-//    searchResults.unique()
-//    searchResults.each{
-//      println it
-//    }
-//
-//
+    def printResults = []
+    def audioResults = []
+    def videoResults = []
 
+    searchResults.each { media ->
+      if (media.type == MediaType.PRINT) {
+        printResults << media
+      }
+      else if (media.type == MediaType.AUDIO) {
+        audioResults << media
+      }
+      else if (media.type == MediaType.VIDEO) {
+        videoResults << media
+      }
+    }
 
-
-
-    return [results: searchResults]
+    return [results: [print: printResults, audio: audioResults, video: videoResults]]
   }
 }
