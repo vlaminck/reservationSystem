@@ -4,11 +4,13 @@ class Media {
 
   MediaType type
   MediaFormat format
+  String artist
   String title
   String description
   Boolean isAvailable = true
 
   static constraints = {
+    artist(nullable: true, blank: false)
     type(nullable: false)
     format(nullable: false, blank: false)
     title(nullable: false, blank: false)

@@ -333,8 +333,7 @@
     position: relative;
     height: 400px;
     width: 100%;
-    top: 20%;
-    /*left: 10%;*/
+    top: 20%; /*left: 10%;*/
 }
 
 #side .search input {
@@ -352,18 +351,17 @@
 #side .search li {
     position: relative;
     list-style-type: none;
-    display: inline-block;
-    /*font-size: 14px;*/
+    display: inline-block; /*font-size: 14px;*/
 }
 
 /*#side .search ul.filters {*/
-    /*position: relative;*/
-    /*background: white;*/
+/*position: relative;*/
+/*background: white;*/
 /*}*/
 
 /*#side .search ul.filters li {*/
-    /*position: relative;*/
-    /*background: blue;*/
+/*position: relative;*/
+/*background: blue;*/
 /*}*/
 
 #side .search ul.filters input {
@@ -377,7 +375,7 @@
     top: 62px;
     left: 242px;
     padding: 20px;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 #wrapper form.account {
@@ -515,8 +513,21 @@
 
 /* */
 
+ul.resultsList {
+    position: relative;
+    width: 100%;
+}
 
-
+ul.resultsList li.artist {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+}
+ul.resultsList li.title {
+    position: relative;
+    display: inline-block;
+    width: 65%;
+}
 
 
 

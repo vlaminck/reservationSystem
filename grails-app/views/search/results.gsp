@@ -8,8 +8,15 @@
 <div id="wrapper">
   RESULTS:
   <ul class="resultsList">
+    <li class="artist">ARTIST</li>
+    <li class="title">TITLE</li>
     <g:each var="media" in="${results}">
-      <li><g:link controller="media" action="show" id="${media.id}">${media.title}</g:link></li>
+      <li class="artist">
+        ${media.artist}
+      </li>
+      <li class="title">
+        <g:link controller="media" action="show" id="${media.id}">${media.title}</g:link>
+      </li>
     </g:each>
   </ul>
 </div>

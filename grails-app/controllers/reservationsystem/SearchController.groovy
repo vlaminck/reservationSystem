@@ -6,18 +6,20 @@ class SearchController {
   def index = {  }
 
   def results = {
-    println "-------------------"
-    println params
-    println ""
-    params.type?.each {
-      println it
-    }
-    println ""
-    params.format?.each {
-      println it
-    }
-    println "-------------------"
+//    println "-------------------"
+//    println params
+//    println ""
+//    params.type?.each {
+//      println it
+//    }
+//    println ""
+//    params.format?.each {
+//      println it
+//    }
+//    println "-------------------"
 
+    def searchTerms = params.query?.split(" ")
+    println searchTerms
 
     def types = []
     params.type?.each {
@@ -29,10 +31,16 @@ class SearchController {
       formats << MediaFormat."${it}"
     }
 
-    def searchResults = Media.createCriteria().list {
+    def filteredResults = Media.createCriteria().list {
       'in'("type", types)
       'in'("format", formats)
+    }
 
+    def searchResults = []
+    filteredResults.each { media ->
+      searchTerms.each { term ->
+        if (media.title?.contains(term) || media.artist?.contains(term)) searchResults << media
+      }
     }
 
     searchResults = searchResults.unique {a, b -> a.title <=> b.title}

@@ -274,13 +274,13 @@ class BootStrap {
               type: MediaType.PRINT,
               format: MediaFormat.EPUB,
               title: it.title,
-              author: it.author
+              artist: it.author
       ))
       saveDomain(new Print(
               type: MediaType.PRINT,
               format: MediaFormat.PAPER,
               title: it.title,
-              author: it.author
+              artist: it.author
       ))
     }
 
