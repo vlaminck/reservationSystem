@@ -21,4 +21,22 @@ class MediaController {
       redirect(uri: "/")
     }
   }
+
+  def list = {
+    def media = [:]
+    if (params.type) {
+      media."${params.type.toLowerCase()}" = Media.findAllByType(MediaType."${params.type}")
+    }
+    else {
+      media.print = Media.findAllByType(MediaType.PRINT)
+      media.audio = Media.findAllByType(MediaType.AUDIO)
+      media.video = Media.findAllByType(MediaType.VIDEO)
+    }
+
+    media.each { k, v ->
+      v.unique {a, b -> a.title <=> b.title}
+    }
+
+    return [mediaList: media]
+  }
 }

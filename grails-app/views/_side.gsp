@@ -25,4 +25,5 @@
       <li><input type="submit" value="Search"/></li>
     </ul>
   </g:form>
+  <g:link controller="media" action="list">Browse All</g:link>
 </div>
