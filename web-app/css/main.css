@@ -333,7 +333,7 @@
     position: relative;
     height: 400px;
     width: 100%;
-    top: 20%; /*left: 10%;*/
+    top: 15%; /*left: 10%;*/
 }
 
 #side .search input {
