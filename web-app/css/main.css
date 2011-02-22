@@ -92,6 +92,33 @@
 
 #header .nav {
     position: relative;
+    left: 0px;
+    float: right;
+}
+
+#header .nav ul {
+    display: none;
+}
+
+#header .nav:hover ul {
+    display: block;
+    position: relative;
+    background-color:gray;
+    height: 30px;
+    width: 65px;
+    top: -12px;
+    padding-top: 16px;
+    -moz-border-radius: 0 0 15px 0;
+    -webkit-border-radius: 0 0 15px 0;
+    border-radius: 0 0 15px 0;    
+}
+
+#header .nav ul li {
+    list-style-type: none;
+}
+
+#header .nav a {
+    position: relative;
     background-color: white;
     color: gray;
     float: right;
@@ -105,6 +132,17 @@
     -moz-border-radius: 15px 0 0 0;
     -webkit-border-radius: 15px 0 0 0;
     border-radius: 15px 0 0 0;
+}
+
+#header .nav ul a {
+    position: relative;
+    color: white;
+    list-style-type: none;
+    -moz-border-radius: 0 0 0 0;
+    -webkit-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+    background: transparent;
+    text-decoration: none;
 }
 
 /*
@@ -126,7 +164,7 @@
     border-bottom: 2px solid black;
 }
 */
-#header .nav.top {
+#header .nav.top a {
     position: relative;
     background-color: white;
     color: gray;
@@ -229,20 +267,18 @@ ul.mediaList li.artist {
     position: relative;
     display: inline-block;
     width: 25%;
-    left: 40px;
-    /*margin:-2px;*/
-    /*padding:4px;*/
-    /*border-bottom: 1px solid;*/
+    left: 40px; /*margin:-2px;*/
+/*padding:4px;*/
+/*border-bottom: 1px solid;*/
 }
 
 ul.mediaList li.title {
     position: relative;
     display: inline-block;
     width: 65%;
-    left: 40px;
-    /*margin:-2px;*/
-    /*padding:4px;*/
-    /*border-bottom: 1px solid;*/
+    left: 40px; /*margin:-2px;*/
+/*padding:4px;*/
+/*border-bottom: 1px solid;*/
 }
 
 
