@@ -5,6 +5,7 @@ class Person {
   String firstName
   String lastName
   String email
+  String phoneNumber
   UserLogin userLogin
   Account account
 
@@ -16,6 +17,7 @@ class Person {
     firstName(nullable: false, blank: false)
     lastName(nullable: false, blank: false)
     email(nullable: false, blank: false, email:true)
+    phoneNumber(nullable: false, blank: false)
     userLogin(nullable: false)
   }
 

@@ -8,34 +8,18 @@ class AccountService {
   static transactional = true
 
   def createAccount(params) {
-    def userLogin
+    def userLogin = userLoginService.createLogin(params)
     def account
     def user
-
-    // create userLogin
-    userLogin = UserLogin.findByUsername(params?.email) ?: new UserLogin(
-            username: params?.email,
-            password: springSecurityService.encodePassword(params?.password),
-            enabled: true)
-
-    if (!userLogin.save()) {
-      println userLogin.errors
-      userLogin = null
-    }
-    else {
-      // give userLogin a role
-      def role = SecRole.findByAuthority('ROLE_USER')
-      if (!userLogin.authorities.contains(role)) {
-        SecUserSecRole.create(userLogin, role)
-      }
-    }
+    def message = [:]
 
     if (userLogin) {
-      account = new Account()
+      account = new Account(cardId: params.cardId)
       user = new Person(
               firstName: params?.firstName,
               lastName: params?.lastName,
-              email: userLogin.username,
+              phoneNumber: params?.phoneNumber,
+              email: params?.email,
               userLogin: userLogin,
               account: account
       )
@@ -43,14 +27,22 @@ class AccountService {
 
       if (!account.save()) {
         println account.errors
+        //TODO: better errorHandling
+        message.error = 'Unable to create new account'
         account = null
       }
 
       if (!user.save()) {
         println user.errors
+        // TODO: better error handling
+        message.error = 'Unable to create new user'
+        account = null
+      }
+      if(!message.error){
+        message.success = 'New account created successfully'
       }
     }
 
-    return account
+    return [account:account, message:message]
   }
 }

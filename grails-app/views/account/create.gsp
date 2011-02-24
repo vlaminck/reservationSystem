@@ -7,23 +7,23 @@
 <body>
 <div id="wrapper">
   <g:form name="createForm" method="post" controller="account" action="createAccount" class="account">
-    First name:
-    <br/>
-    <input type="text" name="firstName"/>
-    <br/>
-    Last name:
-    <br/>
-    <input type="text" name="lastName"/>
-    <br/>
-    Email:
-    <br/>
-    <input type="email" name="email"/>
-    <br/>
-    Password:
-    <br/>
-    <input type="password" name="password"/>
-    <br/>
-    <input type="submit" value="Submit"/>
+    <ul>
+      <li>First name</li>
+      <li>Last name:</li>
+      <li><input type="text" name="firstName"/></li>
+      <li><input type="text" name="lastName"/></li>
+      <li class="email">Email:</li>
+      <li class="email"><input type="email" name="email"/></li>
+      <li>Card Number:</li>
+      <li>Phone Number:</li>
+      <li><input type="text" name="cardId"/></li>
+      <li><input type="text" name="phoneNumber"/></li>
+      <li>Password:</li>
+      <li>Confirm Password:</li>
+      <li><input type="password" name="password"/></li>
+      <li><input type="password" name="confirmPassword"/></li>
+      <li><input type="submit" value="Submit"/></li>
+    </ul>
   </g:form>
 </div>
 </body>

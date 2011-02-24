@@ -11,11 +11,15 @@
 }
 
 #LRS_Logo {
+    position: relative;
     font-size: 30px;
     font-color: #666;
     text-align: center;
-    margin: 10px;
+    width: 50%;
+    margin-left: 25%;
     color: white;
+    height: 50%;
+    top: 25%;
 }
 
 #side {
@@ -79,8 +83,8 @@
 
 #wrapper form.account {
     position: relative;
-    width: 150px;
-    height: 200px;
+    width: 400px;
+    height: 240px;
     border: 7px solid #aaa;
     font: 300 14px / 20px Arial, Sans-serif;
     color: #999;
@@ -90,27 +94,54 @@
     padding: 10px;
 }
 
+#wrapper form.account ul {
+    position: relative;
+    width: 100%;
+}
+
+#wrapper form.account ul li {
+    position:relative;
+    display:inline-block;
+    width: 40%;
+    margin:1px;
+}
+
+#wrapper form.account ul li.email {
+    position:relative;
+    display:inline-block;
+    width: 80%;
+}
+
+#wrapper form.account ul li.email input {
+    position:relative;
+    width: 89%;
+}
+
 #header .nav {
     position: relative;
     left: 0px;
     float: right;
+    width: 115px;
+    height: 41px;
+    top: 11px;
 }
 
 #header .nav ul {
     display: none;
+    position: relative;
+    background-color: gray;
+    height: 20px;
+    width: 75px;
+    top: 5px;
+    left: 0px;
+    padding-top: 0px;
+    -moz-border-radius: 0 0 15px 0;
+    -webkit-border-radius: 0 0 15px 0;
+    border-radius: 0 0 15px 0;
 }
 
 #header .nav:hover ul {
     display: block;
-    position: relative;
-    background-color:gray;
-    height: 30px;
-    width: 65px;
-    top: -12px;
-    padding-top: 16px;
-    -moz-border-radius: 0 0 15px 0;
-    -webkit-border-radius: 0 0 15px 0;
-    border-radius: 0 0 15px 0;    
 }
 
 #header .nav ul li {
@@ -123,8 +154,8 @@
     color: gray;
     float: right;
     height: 19px;
-    width: 80px;
-    top: -15px;
+    width: 90px;
+    top: 0px;
     left: 0px;
     text-decoration: none;
     line-height: 20px;
@@ -143,6 +174,8 @@
     border-radius: 0 0 0 0;
     background: transparent;
     text-decoration: none;
+    text-align:center;
+    line-height:13px;
 }
 
 /*
@@ -170,7 +203,7 @@
     color: gray;
     float: right;
     height: 20px;
-    width: 80px;
+    width: 90px;
     top: -56px;
     left: 0px;
     text-decoration: none;
@@ -179,6 +212,17 @@
     -moz-border-radius: 0 0 0 15px;
     -webkit-border-radius: 0 0 0 15px;
     border-radius: 0 0 0 15px;
+}
+
+#header .left {
+    position: relative;
+    height: 100%;
+}
+
+#header .right {
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
 /*#header .left {*/
@@ -280,6 +324,20 @@ ul.mediaList li.title {
 /*padding:4px;*/
 /*border-bottom: 1px solid;*/
 }
+
+
+#flashMessage {
+    position: relative;
+    background-color: yellow;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid red;
+    text-align:center;
+    line-height: 20px;
+}
+
+
+
 
 
 

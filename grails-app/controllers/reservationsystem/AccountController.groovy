@@ -23,11 +23,11 @@ class AccountController {
     def currentUser = Person.currentUser
     def account = currentUser.account
 
-    return [currentUser: currentUser, account: account]
+    return [currentUser: currentUser, account: account, message: params?.message]
   }
 
   def create = {
-    return [:]
+    return [message: params?.message]
   }
 
   def save = {
@@ -55,17 +55,22 @@ class AccountController {
   }
 
   def createAccount = {
-    def account = accountService.createAccount(params)
-// TODO: auto-login
-//    def userLogin = account?.owner?.userLogin
-//    if(userLogin){
-//      SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userLogin, userLogin.password, true));
-//    }
-//
-//    println "Person.currentUser: ${Person.currentUser}"
-
-    if (account) redirect(action: 'show')
-    else redirect(action: 'create')
+    def redirectAction = 'create'
+    def redirectParams = [message: 'Your passwords must match']
+    if (params.password && params.password == params.confirmPassword) {
+      def accountCreationMap = accountService.createAccount(params)
+      def account = accountCreationMap.account
+      def message = accountCreationMap.message
+      if (account) {
+        redirectAction = 'show'
+        redirectParams.message = message?.success
+      }
+      else {
+        redirectAction = 'create'
+        redirectParams.message = message?.error
+      }
+    }
+    redirect(action: redirectAction, params: redirectParams)
   }
 
 }

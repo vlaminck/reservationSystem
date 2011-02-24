@@ -37,11 +37,12 @@ class BootStrap {
     if (!adminUser.authorities.contains(adminRole)) {
       SecUserSecRole.create(adminUser, adminRole)
     }
-    def adminAccount = new Account()
+    def adminAccount = new Account(cardId:'1 1111 11111 1111')
     def adminPerson = new Person(
             firstName: 'admin',
             lastName: 'admin',
             email: 'foo@bar.com',
+            phoneNumber: '1',
             userLogin: adminUser,
             account: adminAccount
     )
@@ -56,13 +57,14 @@ class BootStrap {
     if (!david.authorities.contains(david)) {
       SecUserSecRole.create(david, userRole)
     }
-    def davidAccount = new Account()
+    def davidAccount = new Account(cardId:'1 4444 55555 4444')
     def davidPerson = new Person(
             firstName: 'David',
             lastName: 'Bauer',
             email: 'foo@bar.com',
+            phoneNumber: '1',
             userLogin: adminUser,
-            account: adminAccount
+            account: davidAccount
     )
     davidAccount.owner = davidPerson
     saveDomain(davidAccount)
@@ -75,13 +77,14 @@ class BootStrap {
     if (!erik.authorities.contains(erik)) {
       SecUserSecRole.create(erik, userRole)
     }
-    def erikAccount = new Account()
+    def erikAccount = new Account(cardId:'1 5555 44444 5555')
     def erikPerson = new Person(
             firstName: 'Erik',
             lastName: 'Knutson',
             email: 'foo@bar.com',
+            phoneNumber: '1',
             userLogin: adminUser,
-            account: adminAccount
+            account: erikAccount
     )
     erikAccount.owner = erikPerson
     saveDomain(erikAccount)
@@ -94,11 +97,12 @@ class BootStrap {
     if (!laura.authorities.contains(laura)) {
       SecUserSecRole.create(laura, userRole)
     }
-    def lauraAccount = new Account()
+    def lauraAccount = new Account(cardId:'1 4321 54321 4321')
     def lauraPerson = new Person(
             firstName: 'Laura',
             lastName: 'Sweet',
             email: 'foo@bar.com',
+            phoneNumber: '1',
             userLogin: laura,
             account: lauraAccount
     )
@@ -113,11 +117,12 @@ class BootStrap {
     if (!steve.authorities.contains(steve)) {
       SecUserSecRole.create(steve, userRole)
     }
-    def steveAccount = new Account()
+    def steveAccount = new Account(cardId:'1 1234 12345 1234')
     def stevePerson = new Person(
             firstName: 'Steve',
             lastName: 'Vlaminck',
             email: 'foo@bar.com',
+            phoneNumber: '1',
             userLogin: steve,
             account: steveAccount
     )
