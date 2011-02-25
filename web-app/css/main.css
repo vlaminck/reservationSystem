@@ -30,13 +30,14 @@
     border-right: solid 2px;
     min-width: 200px;
     left: 0;
+    top: 62px;
 }
 
 #side .search {
     position: relative;
     height: 400px;
     width: 100%;
-    top: 15%; /*left: 10%;*/
+    top: 10%; /*left: 10%;*/
 }
 
 #side .search input {
@@ -92,6 +93,29 @@
     -webkit-border-radius: 15px;
     border-radius: 15px;
     padding: 10px;
+}
+
+#wrapper form.login {
+    position: relative;
+    width: 200px;
+    height: 115px;
+    border: 7px solid #aaa;
+    font: 300 14px / 20px Arial, Sans-serif;
+    color: #999;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#wrapper form.login input[type=text],
+#wrapper form.login input[type=password]{
+    width: 120px;
+}
+#wrapper form.login input[type=password],
+#wrapper form.login input[type=submit],
+#wrapper form.login input[type=text]{
+    float: right;
 }
 
 #wrapper form.account ul {
@@ -329,9 +353,9 @@ ul.mediaList li.title {
 #flashMessage {
     position: relative;
     background-color: yellow;
-    margin-left: 10%;
-    margin-right: 10%;
-    border: 1px solid red;
+    /*margin-left: 10%;*/
+    /*margin-right: 10%;*/
+    border-bottom: 1px solid red;
     text-align:center;
     line-height: 20px;
 }

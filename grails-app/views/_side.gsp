@@ -1,5 +1,5 @@
+<g:if test="${message}"><div id="flashMessage">${message}</div></g:if>
 <div class="search">
-  <g:if test="${message}"><div id="flashMessage">${message}</div></g:if>
   <g:form controller="search" action="results">
     <ul>
       <li>SEARCH:</li>
