@@ -8,7 +8,7 @@
 <div id="wrapper">
   Hello ${currentUser.firstName} ${currentUser.lastName},
   <br/>
-  <g:if test="${account}">
+  <g:if test="${account.reservationList}">
     You have the following reserved:
     <ul class="reservationList">
       <li class="title" ><b>TITLE</b></li>

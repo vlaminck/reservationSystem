@@ -45,4 +45,14 @@ class AccountService {
 
     return [account:account, message:message]
   }
+
+  def flagForDeletion(account){
+    account.flagForDeletion = true
+    if(!account.save()){
+      return "Unable to flag your account fo deletion\nPlease try again later." 
+    }
+    else {
+      return "Your Account has been flagged for deletion"
+    }
+  }
 }

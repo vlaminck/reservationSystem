@@ -5,6 +5,7 @@ class Account {
   Person owner
   String cardId
   ReservationList reservationList
+  Boolean flagForDeletion = false
 
   static hasMany = [fine: Fine]
 

@@ -23,7 +23,6 @@ class AccountController {
     def currentUser = Person.currentUser
     def account = currentUser.account
 
-
     return [currentUser: currentUser, account: account, message: params?.message]
   }
 
@@ -52,7 +51,12 @@ class AccountController {
   }
 
   def delete = {
-
+    def account = Person.currentUser.account
+    def message
+    if (account) {
+      message = accountService.flagForDeletion(account)
+    }
+    redirect(action: 'show', params: [message: message])
   }
 
   def createAccount = {

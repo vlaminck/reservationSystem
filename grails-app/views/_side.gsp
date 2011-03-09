@@ -1,4 +1,6 @@
+<%@ page import="reservationsystem.Person" %>
 <g:if test="${message}"><div id="flashMessage">${message}</div></g:if>
+<g:elseif test="${Person.currentUser && Person.currentUser.account.flagForDeletion}"><div id="flashMessage">Your Account has been flagged for deletion</div></g:elseif>
 <div class="search">
   <g:form controller="search" action="results">
     <ul>
