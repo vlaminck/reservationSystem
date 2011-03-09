@@ -23,6 +23,7 @@ class AccountController {
     def currentUser = Person.currentUser
     def account = currentUser.account
 
+
     return [currentUser: currentUser, account: account, message: params?.message]
   }
 

@@ -360,6 +360,42 @@ ul.mediaList li.title {
     line-height: 20px;
 }
 
+ul.reservationList {
+    position:relative;
+    width: 500px;
+}
+
+ul.reservationList li.title {
+    position:relative;
+    width: 80%;
+    display: inline-block;
+}
+
+ul.reservationList li.format {
+    position:relative;
+    width: 19%;
+    display: inline-block;
+}
+
+/*ul.reservationList li.title:nth-child(2n) {*/
+    /*background-color:gray;*/
+/*}*/
+
+/*ul.reservationList li.format:nth-child(2n) {*/
+    /*background-color:gray;*/
+/*}*/
+
+
+/*ul.reservationList li:nth-child(4n-1) {*/
+    /*background-color:gray;*/
+/*}*/
+
+/*ul.reservationList li:nth-child(4n) {*/
+    /*background-color:gray;*/
+/*}*/
+
+
+
 
 
 

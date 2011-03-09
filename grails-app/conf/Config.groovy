@@ -98,5 +98,6 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/account/create': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/account/createAccount': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/account/**': ['ROLE_USER'],
+        '/media/reserve/*': ['ROLE_USER'],
         '/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]

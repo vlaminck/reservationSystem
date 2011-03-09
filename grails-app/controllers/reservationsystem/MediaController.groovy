@@ -1,10 +1,12 @@
 package reservationsystem
 
 class MediaController {
+  def reserveService
 
   def index = { }
 
   def show = {
+    def message = params.message ?: null
     def media = Media.get(params.id)
     if (media) {
       def duplicates = Media.createCriteria().list {
@@ -13,9 +15,7 @@ class MediaController {
         eq("isAvailable", true)
       }
 
-      def availableFormats = duplicates*.format
-      availableFormats = availableFormats.unique()
-      return [media: media, availableFormats: availableFormats]
+      return [media: media, duplicates: duplicates, message: message]
     }
     else {
       redirect(uri: "/")
@@ -38,5 +38,14 @@ class MediaController {
     }
 
     return [mediaList: media]
+  }
+
+  def reserve = {
+    def reserveMessage = 'Unable to reserve media'
+    def media = Media.get(params.id)
+    if (media.isAvailable) {
+      reserveMessage = reserveService.reserve(media)
+    }
+    redirect(action: 'show', id: media.id, params: ['message': reserveMessage])
   }
 }

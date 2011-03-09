@@ -22,7 +22,7 @@
         </p>
         <p>
           <label for='remember_me'>Remember me</label>
-          <input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me'
+            <input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me'
             <g:if test='${hasCookie}'>checked='checked'</g:if>/>
           <input type='submit' value='Login'/>
         </p>
