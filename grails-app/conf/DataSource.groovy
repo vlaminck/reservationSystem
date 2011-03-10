@@ -28,14 +28,28 @@ environments {
   }
   test {
     dataSource {
-      dbCreate = "update"
+      dbCreate = "create-drop"
       url = "jdbc:hsqldb:mem:testDb"
     }
   }
   production {
     dataSource {
-      dbCreate = "update"
-      url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+      pooled = true
+      driverClassName = "com.mysql.jdbc.Driver"
+      dbCreate = "update" // one of 'create', 'create-drop','update'
+      username = 'root'
+      password = 'mysql'
+      url = 'jdbc:mysql://db.cypksy9undoh.us-east-1.rds.amazonaws.com:3306/reservationSystem'
+      dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+      properties {
+        validationQuery = "SELECT 1"
+        testOnBorrow = true
+        testOnReturn = true
+        testWhileIdle = true
+        timeBetweenEvictionRunsMillis = 1000 * 60 * 30
+        numTestsPerEvictionRun = 3
+        minEvictableIdleTimeMillis = 1000 * 60 * 30
+      }
     }
   }
 }

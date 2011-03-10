@@ -365,16 +365,18 @@ ul.reservationList {
     width: 500px;
 }
 
-ul.reservationList li.title {
+ul.reservationList li {
     position:relative;
-    width: 80%;
     display: inline-block;
+    margin-bottom:10px;
+}
+
+ul.reservationList li.title {
+    width: 79%;
 }
 
 ul.reservationList li.format {
-    position:relative;
     width: 19%;
-    display: inline-block;
 }
 
 /*ul.reservationList li.title:nth-child(2n) {*/

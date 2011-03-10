@@ -22,6 +22,7 @@ class AccountController {
   def show = {
     def currentUser = Person.currentUser
     def account = currentUser.account
+    def fines = Fine
 
     return [currentUser: currentUser, account: account, message: params?.message]
   }
@@ -76,6 +77,20 @@ class AccountController {
       }
     }
     redirect(action: redirectAction, params: redirectParams)
+  }
+
+  def fineMe = {
+    if (Person.currentUser) {
+      def account = Person.currentUser.account
+      def fine = new Fine(offense: "being lazy", description: "get off your ass once in a while", amountOwed: 2.49, account: account)
+      account.addToFines(fine)
+      account.save()
+    }
+    redirect(action: 'show')
+  }
+
+  def payFines = {
+    return [:]
   }
 
 }

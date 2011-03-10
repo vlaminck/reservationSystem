@@ -7,11 +7,19 @@ class Account {
   ReservationList reservationList
   Boolean flagForDeletion = false
 
-  static hasMany = [fine: Fine]
+  static hasMany = [fines: Fine]
 
   static constraints = {
     owner(nullable: false)
     cardId(nullable: false)
     reservationList(nullable: true)
+  }
+
+  def calculateFines() {
+    def total = 0.0
+    fines.each{
+      total += it.amountOwed
+    }
+    return total
   }
 }
