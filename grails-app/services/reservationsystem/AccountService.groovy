@@ -25,34 +25,42 @@ class AccountService {
       )
       account.owner = user
 
-      if (!account.save()) {
-        println account.errors
-        //TODO: better errorHandling
-        message.error = 'Unable to create new account'
-        account = null
-      }
-
       if (!user.save()) {
         println user.errors
         // TODO: better error handling
         message.error = 'Unable to create new user'
         account = null
       }
-      if(!message.error){
+      else if (!account.save()) {
+        println account.errors
+        //TODO: better errorHandling
+        message.error = 'Unable to create new account'
+        account = null
+      }
+
+      if (!message.error) {
         message.success = 'New account created successfully'
       }
     }
+    else {
+      message.error = "An unexpected error occured.\nPlease try again later."
+    }
 
-    return [account:account, message:message]
+    return [account: account, message: message]
   }
 
-  def flagForDeletion(account){
-    account.flagForDeletion = true
-    if(!account.save()){
-      return "Unable to flag your account fo deletion\nPlease try again later." 
+  def flagForDeletion(account) {
+    def message = "Unable to find you Account.\nPlease try again later."
+    if (account) {
+      account.flagForDeletion = true
+      if (!account.save()) {
+        account.flagForDeletion = false
+        message = "Unable to flag your account fo deletion\nPlease try again later."
+      }
+      else {
+        message = "Your Account has been flagged for deletion"
+      }
     }
-    else {
-      return "Your Account has been flagged for deletion"
-    }
+    return message
   }
 }

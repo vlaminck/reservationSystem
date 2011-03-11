@@ -38,6 +38,19 @@ class TestFixtures {
     return userLogin
   }
 
+  static fine = { account ->
+    def fine = new Fine(
+            amountOwed: 2.49,
+            offense: 'whoCares',
+            description: 'no one',
+            accoount:account
+    )
+    account.addToFines(fine)
+    saveDomain(fine)
+    saveDomain(account)
+    return fine
+  }
+
   static saveDomain(domain) {
     if (!domain.save(flush: true)) {
       println "Domain failed to save! " + domain.errors.allErrors.toString()

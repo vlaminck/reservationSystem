@@ -16,10 +16,11 @@ class Account {
   }
 
   def calculateFines() {
-    def total = 0.0
+    Double total = 0.0
     fines.each{
       total += it.amountOwed
     }
-    return total
+    total = total.trunc(2)
+    return total.toString()
   }
 }
