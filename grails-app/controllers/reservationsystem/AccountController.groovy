@@ -57,7 +57,7 @@ class AccountController {
   }
 
   def delete = {
-    def account = Person.currentUser.account
+    def account = Person.currentUser?.account
     def message = "Couldn't find your account"
     if (account) {
       message = accountService.flagForDeletion(account)
