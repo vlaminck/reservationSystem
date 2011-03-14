@@ -21,10 +21,14 @@ class AccountController {
 
   def show = {
     def currentUser = Person.currentUser
-    def account = currentUser.account
-    def fines = Fine
+    if (currentUser) {
+      def account = currentUser.account
 
-    return [currentUser: currentUser, account: account, message: params?.message]
+      return [currentUser: currentUser, account: account, message: params?.message]
+    }
+    else {
+      redirect(uri: '/')
+    }
   }
 
   def create = {
@@ -37,12 +41,13 @@ class AccountController {
       if (personService.savePerson(person, params)) redirect(action: 'show')
       else redirect(uri: '/')
     }
-
+    else {
+      redirect(uri: '/')
+    }
   }
 
   def update = {
     def person = Person.currentUser
-    println person
     if (person) {
       return [person: Person.currentUser]
     }
@@ -53,7 +58,7 @@ class AccountController {
 
   def delete = {
     def account = Person.currentUser.account
-    def message
+    def message = "Couldn't find your account"
     if (account) {
       message = accountService.flagForDeletion(account)
     }

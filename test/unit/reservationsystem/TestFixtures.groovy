@@ -5,7 +5,7 @@ class TestFixtures {
   static account = {
     return new Account(
             cardId: 123,
-            flagGorDeletion: false
+            flagForDeletion: false
     )
   }
 
