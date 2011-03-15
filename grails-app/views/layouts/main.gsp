@@ -13,6 +13,8 @@
 </div>
 <div id="header"><g:render template="/header"/></div>
 <div id="side"><g:render template="/side"/></div>
-<g:layoutBody/>
+<div id="wrapper">
+  <g:layoutBody/>
+</div>
 </body>
 </html>

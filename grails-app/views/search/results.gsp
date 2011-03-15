@@ -5,8 +5,6 @@
   <meta name="layout" content="main"/>
 </head>
 <body>
-<div id="wrapper">
-  <g:render template="/mediaList" model="[mediaList:results]"/>
-</div>
+<g:render template="/mediaList" model="[mediaList:results]"/>
 </body>
 </html>
