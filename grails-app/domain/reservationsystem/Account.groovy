@@ -15,6 +15,10 @@ class Account {
     reservationList(nullable: true)
   }
 
+  Boolean hasReservationPrvlgs(){
+    return true
+  }
+
   def calculateFines() {
     Double total = 0.0
     fines.each{

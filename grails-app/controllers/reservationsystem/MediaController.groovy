@@ -38,8 +38,8 @@ class MediaController {
   def reserve = {
     def reserveMessage = 'Unable to reserve media'
     def media = Media.get(params.id)
-    println Person.currentUser
-    if (Person.currentUser) {
+    def currentUser = Person.currentUser
+    if (currentUser && !currentUser.hasMaterialReserved(media)) {
       if (media.isAvailable) {
         reserveMessage = reserveService.reserve(media, Person.currentUser.account)
       }

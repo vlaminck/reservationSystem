@@ -31,7 +31,7 @@ class Person {
     current.set(p)
   }
 
-  Boolean hasReserved(media){
+  Boolean hasMaterialReserved(media){
     def reservations = account.reservationList?.reservations
     if(reservations){
       return reservations*.media.contains(media)

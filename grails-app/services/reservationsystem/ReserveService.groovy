@@ -6,17 +6,22 @@ class ReserveService {
 
   def reserve(media, account) {
     def message
-    if (!account.reservationList) {
-      createReservationList(account)
+    if (account?.hasReservationPrvlgs()) {
+      if (!account.reservationList) {
+        createReservationList(account)
+      }
+      def reservation = new Reservation(media: media)
+      account.reservationList.addToReservations(reservation)
+      if (reservation.save()) {
+        media.isAvailable = false
+        media.save()
+      }
+      if (!account.save()) {
+        message = "Failed to Reserve ${media.title}"
+      }
     }
-    def reservation = new Reservation(media: media)
-    account.reservationList.addToReservations(reservation)
-    if (reservation.save()) {
-      media.isAvailable = false
-      media.save()
-    }
-    if (!account.save()) {
-      message = "Failed to Reserve ${media.title}"
+    else {
+      message = "You dan't have permission to reserve."
     }
     return message ?: "Susccessfully Reserved ${media.title}"
   }
@@ -71,8 +76,8 @@ class ReserveService {
   def removeFromWaitList(media, account) {
     def waitList = WaitList.findByMediaAndAccount(media, account)
     waitList.delete()
-    
-    if(WaitList.countByMedia(media) > 0){
+
+    if (WaitList.countByMedia(media) > 0) {
       updateWaitListPositions(media)
       reserveFromWaitList(media)
     }
@@ -81,11 +86,11 @@ class ReserveService {
     }
   }
 
-  def updateWaitListPositions(media){
+  def updateWaitListPositions(media) {
     def waitLists = WaitList.findAllByMedia(media)
     waitLists.sort { it.position }
     def count = 0
-    waitLists.each{
+    waitLists.each {
       it.position = count++
       it.save()
     }
