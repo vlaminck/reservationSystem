@@ -13,8 +13,9 @@ class WaitList {
   }
 
   def estimatedWait() {
-    def plural = position == 1 ? 's' : ''
-    return "$position week$plural"
+    def offset = position + 1
+    def plural = offset != 1 ? 's' : ''
+    return "$offset week$plural"
   }
 
   static getLastPosition(media) {

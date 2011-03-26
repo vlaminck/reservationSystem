@@ -62,9 +62,33 @@ class ReserveService {
   }
 
   def addToWaitList(media, account) {
-    def position = WaitList.getLastPosition(media) + 1
+    def lastWaitList = WaitList.getLastPosition(media)
+    def position = lastWaitList ? lastWaitList.position + 1 : 0
     def waitList = new WaitList(account: account, media: media, position: position).save()
     return waitList
+  }
+
+  def removeFromWaitList(media, account) {
+    def waitList = WaitList.findByMediaAndAccount(media, account)
+    waitList.delete()
+    
+    if(WaitList.countByMedia(media) > 0){
+      updateWaitListPositions(media)
+      reserveFromWaitList(media)
+    }
+    else {
+      media.isAvailable = true
+    }
+  }
+
+  def updateWaitListPositions(media){
+    def waitLists = WaitList.findAllByMedia(media)
+    waitLists.sort { it.position }
+    def count = 0
+    waitLists.each{
+      it.position = count++
+      it.save()
+    }
   }
 
   private createReservationList(account) {

@@ -38,12 +38,15 @@ class MediaController {
   def reserve = {
     def reserveMessage = 'Unable to reserve media'
     def media = Media.get(params.id)
-    if (media.isAvailable) {
-      reserveMessage = reserveService.reserve(media, Person.currentUser.account)
-    }
-    else {
-      if(reserveService.addToWaitList(media, account)){
-        reserveMessage = "You have been added to the wait list."
+    println Person.currentUser
+    if (Person.currentUser) {
+      if (media.isAvailable) {
+        reserveMessage = reserveService.reserve(media, Person.currentUser.account)
+      }
+      else {
+        if (reserveService.addToWaitList(media, Person.currentUser.account)) {
+          reserveMessage = "You have been added to the wait list."
+        }
       }
     }
     redirect(action: 'show', id: media.id, params: ['message': reserveMessage])
@@ -52,9 +55,18 @@ class MediaController {
   def returnMedia = {
     def media = Media.get(params.id)
     def message = "ERROR!!!!"
-    if(media){
+    if (media) {
       message = reserveService.returnMedia(media, Person.currentUser.account)
     }
-    redirect(controller:"account", action:"show", params:[message:message])
+    redirect(controller: "account", action: "show", params: [message: message])
+  }
+
+  def stopWaiting = {
+    def media = Media.get(params.id)
+    def message = "ERROR!!!!"
+    if (media) {
+      message = reserveService.removeFromWaitList(media, Person.currentUser.account)
+    }
+    redirect(controller: "account", action: "show", params: [message: message])
   }
 }

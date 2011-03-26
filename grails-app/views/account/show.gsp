@@ -22,7 +22,9 @@ Hello ${currentUser.firstName} ${currentUser.lastName},
     <li class="return"></li>
     <g:each var="reservation" in="${account.reservationList.reservations}">
       <li class="title">
-        ${reservation.media.title}
+        <g:link controller="media" action="show" id="${reservation.media.id}">
+          ${reservation.media.title}
+        </g:link>
       </li>
       <li class="format">
         ${reservation.media.format.toString().toLowerCase()}
@@ -38,5 +40,30 @@ Hello ${currentUser.firstName} ${currentUser.lastName},
 <g:else>
   You don't have anything reserved.
 </g:else>
+<g:if test="${waitList}">
+  You are on a wait list for the following:
+  <ul class="reservationList">
+    <li class="title"><b>TITLE</b></li>
+    <li class="format"><b>FORMAT</b></li>
+    <li class="return"></li>
+    <g:each var="media" in="${waitList}">
+      <li class="title">
+        <g:link controller="media" action="show" id="${media.id}">
+          ${media.title}
+        </g:link>
+      </li>
+      <li class="format">
+        ${media.format.toString().toLowerCase()}
+      </li>
+      <li class="return">
+        <g:link controller="media" action="stopWaiting" id="${media.id}">
+          stop waiting
+        </g:link>
+      </li>
+    </g:each>
+  </ul>
+</g:if>
+
+
 </body>
 </html>

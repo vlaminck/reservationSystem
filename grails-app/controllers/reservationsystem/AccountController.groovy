@@ -23,8 +23,15 @@ class AccountController {
     def currentUser = Person.currentUser
     if (currentUser) {
       def account = currentUser.account
+      def waitLists = WaitList.findAllByAccount(account)
+      def waitList = waitLists*.media
 
-      return [currentUser: currentUser, account: account, message: params?.message]
+      return [
+              currentUser: currentUser,
+              account: account,
+              waitList: waitList,
+              message: params?.message
+      ]
     }
     else {
       redirect(uri: '/')

@@ -13,6 +13,7 @@ class AccountControllerTests extends ControllerUnitTestCase {
     mockDomain(Person)
     mockDomain(Account)
     mockDomain(UserLogin)
+    mockDomain(WaitList)
 
     person = TestFixtures.person()
     controller = new AccountController()
