@@ -91,7 +91,7 @@ class AccountServiceTests extends GrailsUnitTestCase {
   void testFlagForDeletion_noAccountReturnsErrorMessage() {
     def message = service.flagForDeletion(null)
 
-    assertEquals "Unable to find you Account.\nPlease try again later.", message
+    assertEquals "Unable to find your Account.\nPlease try again later.", message
   }
 
   void testFlagForDeletion_flagsAccountForDeletion() {

@@ -19,7 +19,7 @@
       <ul>
         <g:each var="duplicate" in="${duplicates}">
           <li>
-            <g:if test="${Person.currentUser?.hasReserved(duplicate)}">
+            <g:if test="${Person.currentUser?.hasMaterialReserved(duplicate)}">
               You have reserved the ${duplicate.format.toString().toLowerCase()} format
             </g:if>
             <g:else>
