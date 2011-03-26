@@ -6,18 +6,6 @@ class SearchController {
   def index = {  }
 
   def results = {
-//    println "-------------------"
-//    println params
-//    println ""
-//    params.type?.each {
-//      println it
-//    }
-//    println ""
-//    params.format?.each {
-//      println it
-//    }
-//    println "-------------------"
-
     if (params.type && params.format && params.query) {
 
       def searchTerms = params.query?.split(" ")
@@ -79,6 +67,5 @@ class SearchController {
     else {
       redirect(uri: "/")
     }
-
   }
 }

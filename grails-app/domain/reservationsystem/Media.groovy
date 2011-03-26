@@ -17,6 +17,10 @@ class Media {
     description(nullable: true, blank: true)
     isAvailable(nullable: false)
   }
+
+  def estimatedWait() {
+    return WaitList.getLastPosition(this)?.estimatedWait()
+  }
 }
 
 enum MediaType {

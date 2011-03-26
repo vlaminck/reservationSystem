@@ -31,4 +31,14 @@ class Person {
     current.set(p)
   }
 
+  Boolean hasReserved(media){
+    def reservations = account.reservationList?.reservations
+    if(reservations){
+      return reservations*.media.contains(media)
+    }
+    else {
+      return false
+    }
+  }
+
 }

@@ -1,3 +1,4 @@
+<%@ page import="reservationsystem.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -17,7 +18,22 @@
     <li>Formats Available:
       <ul>
         <g:each var="duplicate" in="${duplicates}">
-          <li><g:link controller="media" action="reserve" id="${duplicate.id}" method="POST">${duplicate.format}</g:link></li>
+          <li>
+            <g:if test="${Person.currentUser?.hasReserved(duplicate)}">
+              You have reserved the ${duplicate.format.toString().toLowerCase()} format
+            </g:if>
+            <g:else>
+              <g:link controller="media" action="reserve" id="${duplicate.id}" method="POST">
+                <g:if test="${duplicate.isAvailable}">
+                  Reserve ${duplicate.format.toString().toLowerCase()} format
+                </g:if>
+                <g:else>
+                  Join the wait list for the ${duplicate.format.toString().toLowerCase()} format.
+                  <span class="watiListInfo">estimated time to wait is ${duplicate.estimatedWait()}</span>
+                </g:else>
+              </g:link>
+            </g:else>
+          </li>
         </g:each>
       </ul>
     </li>

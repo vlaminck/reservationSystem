@@ -362,7 +362,7 @@ ul.mediaList li.title {
 
 ul.reservationList {
     position:relative;
-    width: 500px;
+    width: 700px;
 }
 
 ul.reservationList li {
@@ -372,11 +372,15 @@ ul.reservationList li {
 }
 
 ul.reservationList li.title {
-    width: 79%;
+    width: 69%;
 }
 
 ul.reservationList li.format {
     width: 19%;
+}
+
+ul.reservationList li.return {
+    width: 9%;
 }
 
 /*ul.reservationList li.title:nth-child(2n) {*/

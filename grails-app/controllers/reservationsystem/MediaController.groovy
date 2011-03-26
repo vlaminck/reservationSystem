@@ -9,12 +9,7 @@ class MediaController {
     def message = params.message ?: null
     def media = Media.get(params.id)
     if (media) {
-      def duplicates = Media.createCriteria().list {
-        eq("title", media.title)
-        eq("type", media.type)
-        eq("isAvailable", true)
-      }
-
+      def duplicates = Media.findAllByTitleAndType(media.title, media.type)
       return [media: media, duplicates: duplicates, message: message]
     }
     else {
@@ -44,8 +39,22 @@ class MediaController {
     def reserveMessage = 'Unable to reserve media'
     def media = Media.get(params.id)
     if (media.isAvailable) {
-      reserveMessage = reserveService.reserve(media)
+      reserveMessage = reserveService.reserve(media, Person.currentUser.account)
+    }
+    else {
+      if(reserveService.addToWaitList(media, account)){
+        reserveMessage = "You have been added to the wait list."
+      }
     }
     redirect(action: 'show', id: media.id, params: ['message': reserveMessage])
+  }
+
+  def returnMedia = {
+    def media = Media.get(params.id)
+    def message = "ERROR!!!!"
+    if(media){
+      message = reserveService.returnMedia(media, Person.currentUser.account)
+    }
+    redirect(controller:"account", action:"show", params:[message:message])
   }
 }

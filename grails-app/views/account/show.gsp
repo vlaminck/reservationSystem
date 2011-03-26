@@ -19,9 +19,19 @@ Hello ${currentUser.firstName} ${currentUser.lastName},
   <ul class="reservationList">
     <li class="title"><b>TITLE</b></li>
     <li class="format"><b>FORMAT</b></li>
+    <li class="return"></li>
     <g:each var="reservation" in="${account.reservationList.reservations}">
-      <li class="title">${reservation.media.title}</li>
-      <li class="format">${reservation.media.format.toString()}</li>
+      <li class="title">
+        ${reservation.media.title}
+      </li>
+      <li class="format">
+        ${reservation.media.format.toString().toLowerCase()}
+      </li>
+      <li class="return">
+        <g:link controller="media" action="returnMedia" id="${reservation.media.id}">
+          return
+        </g:link>
+      </li>
     </g:each>
   </ul>
 </g:if>
