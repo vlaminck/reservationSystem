@@ -29,7 +29,9 @@
                 </g:if>
                 <g:else>
                   Join the wait list for the ${duplicate.format.toString().toLowerCase()} format.
-                  <span class="watiListInfo">estimated time to wait is ${duplicate.estimatedWait()}</span>
+                  <g:if test="${duplicate.estimatedWait()}">
+                    <span class="watiListInfo">estimated time to wait is ${duplicate.estimatedWait()}</span>
+                  </g:if>
                 </g:else>
               </g:link>
             </g:else>

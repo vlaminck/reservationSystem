@@ -67,10 +67,31 @@ class ReserveService {
   }
 
   def addToWaitList(media, account) {
-    def lastWaitList = WaitList.getLastPosition(media)
-    def position = lastWaitList ? lastWaitList.position + 1 : 0
-    def waitList = new WaitList(account: account, media: media, position: position).save()
-    return waitList
+    // TODO: remove println's
+    println ""
+    if (!media.waitList) {
+      media.waitList = new WaitList(media: media)
+      if(!media.save()){
+        println media.errors
+      }
+    }
+    println media.waitList
+    println media.waitList?.waitingPeople
+    def position = media.waitList?.getLastPosition() ?: 0
+    def waitingPerson = new WaitingPerson(account: account, media: media, positionInLine: position, waitList:media.waitList)
+    if (waitingPerson.save()) {
+      media.waitList?.addToWaitingPeople(waitingPerson)
+      if(!media.save()){
+        println media.errors
+      }
+    }
+    else {
+      println waitingPerson.errors
+    }
+    println waitingPerson
+    println media.waitList*.waitingPeople
+    println media.waitList?.waitingPeople.find { it == waitingPerson }
+    return media.waitList?.waitingPeople.find { it == waitingPerson }
   }
 
   def removeFromWaitList(media, account) {

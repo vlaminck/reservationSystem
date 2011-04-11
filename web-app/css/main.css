@@ -22,6 +22,11 @@
     top: 25%;
 }
 
+#LRS_Logo a {
+    text-decoration: none;
+    color: white;
+}
+
 #side {
     position: fixed;
     height: 100%;
@@ -145,7 +150,7 @@
     position: relative;
     left: 0px;
     float: right;
-    width: 115px;
+    width: 140px;
     height: 41px;
     top: 11px;
 }
@@ -155,7 +160,7 @@
     position: relative;
     background-color: gray;
     height: 20px;
-    width: 75px;
+    width: 100px;
     top: 5px;
     left: 0px;
     padding-top: 0px;
@@ -178,7 +183,7 @@
     color: gray;
     float: right;
     height: 19px;
-    width: 90px;
+    width: 115px;
     top: 0px;
     left: 0px;
     text-decoration: none;
@@ -187,6 +192,7 @@
     -moz-border-radius: 15px 0 0 0;
     -webkit-border-radius: 15px 0 0 0;
     border-radius: 15px 0 0 0;
+    text-align:center;
 }
 
 #header .nav ul a {

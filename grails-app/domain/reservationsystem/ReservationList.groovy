@@ -6,4 +6,8 @@ class ReservationList {
 
   static constraints = {
   }
+
+  def canReserveMedia() {
+    return reservations ? reservations.size() < 5 : true
+  }
 }

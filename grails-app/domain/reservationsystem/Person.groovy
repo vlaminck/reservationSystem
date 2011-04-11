@@ -41,4 +41,8 @@ class Person {
     }
   }
 
+  def canReserveMedia(){
+    return account.canReserveMedia()
+  }
+
 }

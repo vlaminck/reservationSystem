@@ -8,6 +8,7 @@ class Media {
   String title
   String description
   Boolean isAvailable = true
+  WaitList waitList
 
   static constraints = {
     artist(nullable: true, blank: false)
@@ -16,10 +17,16 @@ class Media {
     title(nullable: false, blank: false)
     description(nullable: true, blank: true)
     isAvailable(nullable: false)
+    waitList(nullable: true)
   }
 
   def estimatedWait() {
-    return WaitList.getLastPosition(this)?.estimatedWait()
+    if(waitList){
+      return "${waitList.getLastPosition()} weeks"
+    }
+    else {
+      return ""
+    }
   }
 }
 

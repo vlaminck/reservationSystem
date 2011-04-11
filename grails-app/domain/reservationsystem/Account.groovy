@@ -6,8 +6,11 @@ class Account {
   String cardId
   ReservationList reservationList
   Boolean flagForDeletion = false
+  Integer failedLoginAttempts = 0
 
   static hasMany = [fines: Fine]
+
+  static transients = ['isLocked']
 
   static constraints = {
     owner(nullable: false)
@@ -15,16 +18,28 @@ class Account {
     reservationList(nullable: true)
   }
 
-  Boolean hasReservationPrvlgs(){
+  Boolean hasReservationPrvlgs() {
     return true
   }
 
   def calculateFines() {
     Double total = 0.0
-    fines.each{
+    fines.each {
       total += it.amountOwed
     }
     total = total.trunc(2)
     return total.toString()
+  }
+
+  def getIsLocked() {
+    return failedLoginAttempts >= 5
+  }
+
+  def setIsLocked() {
+    failedLoginAttempts = 5
+  }
+
+  def canReserveMedia(){
+    return reservationList ? reservationList.canReserveMedia() : true
   }
 }

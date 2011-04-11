@@ -1,8 +1,5 @@
 package reservationsystem
 
-import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-
 class AccountController {
   def accountService
   def personService
@@ -23,8 +20,8 @@ class AccountController {
     def currentUser = Person.currentUser
     if (currentUser) {
       def account = currentUser.account
-      def waitLists = WaitList.findAllByAccount(account)
-      def waitList = waitLists*.media
+      def waitLists = WaitingPerson.findAllByAccount(account)*.waitList
+      def waitList = waitLists ? waitLists*.media : []
 
       return [
               currentUser: currentUser,
