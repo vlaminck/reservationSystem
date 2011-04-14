@@ -14,6 +14,21 @@ class BootStrap {
 
       createUsers()
       createMedia()
+      def fourHourBody = Print.findAllByArtist("Timothy Ferriss");
+      fourHourBody.each { fhb ->
+        fhb.coverArtLocation = "4-hour-body.jpeg"
+        fhb.save()
+      }
+      def mumfordAndSons = Audio.findAllByArtist("Mumford & Sons");
+      mumfordAndSons.each { ms ->
+        ms.coverArtLocation = "Mumfordsonssighnomore.jpg"
+        ms.save()
+      }
+      def inception = Video.findAllByTitle("Inception");
+      inception.each { i ->
+        i.coverArtLocation = "Inception.jpg"
+        i.save()
+      }
 
     }
     else {
@@ -37,7 +52,7 @@ class BootStrap {
     if (!adminUser.authorities.contains(adminRole)) {
       SecUserSecRole.create(adminUser, adminRole)
     }
-    def adminAccount = new Account(cardId:'1 1111 11111 1111')
+    def adminAccount = new Account(cardId: '1 1111 11111 1111')
     def adminPerson = new Person(
             firstName: 'admin',
             lastName: 'admin',
@@ -57,7 +72,7 @@ class BootStrap {
     if (!david.authorities.contains(david)) {
       SecUserSecRole.create(david, userRole)
     }
-    def davidAccount = new Account(cardId:'1 4444 55555 4444')
+    def davidAccount = new Account(cardId: '1 4444 55555 4444')
     def davidPerson = new Person(
             firstName: 'David',
             lastName: 'Bauer',
@@ -77,7 +92,7 @@ class BootStrap {
     if (!erik.authorities.contains(erik)) {
       SecUserSecRole.create(erik, userRole)
     }
-    def erikAccount = new Account(cardId:'1 5555 44444 5555')
+    def erikAccount = new Account(cardId: '1 5555 44444 5555')
     def erikPerson = new Person(
             firstName: 'Erik',
             lastName: 'Knutson',
@@ -97,7 +112,7 @@ class BootStrap {
     if (!laura.authorities.contains(laura)) {
       SecUserSecRole.create(laura, userRole)
     }
-    def lauraAccount = new Account(cardId:'1 4321 54321 4321')
+    def lauraAccount = new Account(cardId: '1 4321 54321 4321')
     def lauraPerson = new Person(
             firstName: 'Laura',
             lastName: 'Sweet',
@@ -117,7 +132,7 @@ class BootStrap {
     if (!steve.authorities.contains(steve)) {
       SecUserSecRole.create(steve, userRole)
     }
-    def steveAccount = new Account(cardId:'1 1234 12345 1234')
+    def steveAccount = new Account(cardId: '1 1234 12345 1234')
     def stevePerson = new Person(
             firstName: 'Steve',
             lastName: 'Vlaminck',
@@ -186,7 +201,7 @@ class BootStrap {
   }
 
   def createMedia() {
-        def books1 = [
+    def books1 = [
             "Unbroken: A World War II Story of Survival, Resilience, and Redemption                                                                                                           ":
             "Laura Hillenbrand                                                                                                                                                                ",
             "Heaven is for Real: A Little Boy's Astounding Story of His Trip to Heaven and Back                                                                                               ":
@@ -341,7 +356,7 @@ class BootStrap {
       video << [title: k.trim(), actor: v?.actor?.trim(), director: v?.director?.trim()]
     }
 
-    video.each{
+    video.each {
       saveDomain(new Video(
               type: MediaType.VIDEO,
               format: MediaFormat.AVI,
@@ -402,7 +417,6 @@ class BootStrap {
             "Illuminations ~ Josh Groban                              ",
             "My World 2.0 ~ Justin Bieber                             ",
             "The Covering ~ Stryper                                   ",
-            "Sigh No More ~ Mumford & Sons                            ",
     ]
 
     def audio = []

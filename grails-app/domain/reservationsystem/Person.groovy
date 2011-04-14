@@ -45,4 +45,15 @@ class Person {
     return account.canReserveMedia()
   }
 
+  Boolean isOnWaitList(media) {
+    def waitingPerson = WaitingPerson.findByAccountAndWaitList(account, media?.waitList)
+    println "waitingPerson: $waitingPerson"
+    return waitingPerson ? true : false
+  }
+
+  def estimatedWait(media){
+    def waitingPerson = WaitingPerson.findByAccountAndWaitList(account, media?.waitList)
+    return waitingPerson?.estimatedWait()
+  }
+
 }

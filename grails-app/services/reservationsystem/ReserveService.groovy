@@ -46,75 +46,91 @@ class ReserveService {
   }
 
   def reserveFromWaitList(media) {
-    def waitList = WaitList.findByMediaAndPosition(media, 0)
+    def waitList = media.waitList
+    def waitingPeople
+    def waitingPerson
     if (!waitList) {
-      def waitLists = WaitList.findAllByMedia(media)
-      waitLists.sort { it.position }
-      waitList = waitLists[0]
+      waitingPeople = waitList.waitingPeople.sort { it.positionInLine }
+      waitingPerson = waitingPeople[0]
     }
+
     if (reserve(media, waitList.account)) {
-      waitList.delete()
-      def waitLists = WaitList.findAllByMedia(media)
-      if (waitLists.contains(waitList)) {
-        waitLists.remove(waitList)
-      }
-      waitLists.sort { it.position }
-      waitLists.eachWithIndex { wL, idx ->
-        wL.position = idx
-        wL.save()
-      }
+      deleteWaitingPerson(waitingPerson)
+      updateWaitListPositions(waitList)
+      return true
+    }
+    else {
+      return false
     }
   }
 
-  def addToWaitList(media, account) {
+  def addToWaitList(media, person) {
     // TODO: remove println's
     println ""
     if (!media.waitList) {
-      media.waitList = new WaitList(media: media)
-      if(!media.save()){
+      media.waitList = new WaitList(media: media).save()
+      if (!media.save()) {
         println media.errors
       }
     }
     println media.waitList
     println media.waitList?.waitingPeople
-    def position = media.waitList?.getLastPosition() ?: 0
-    def waitingPerson = new WaitingPerson(account: account, media: media, positionInLine: position, waitList:media.waitList)
-    if (waitingPerson.save()) {
-      media.waitList?.addToWaitingPeople(waitingPerson)
-      if(!media.save()){
-        println media.errors
+    if (!person.isOnWaitList(media)) {
+      def position = media.waitList?.getLastPosition() ?: 0
+      def waitingPerson = new WaitingPerson(account: person.account, media: media, positionInLine: position, waitList: media.waitList)
+      if (waitingPerson.save()) {
+        media.waitList?.addToWaitingPeople(waitingPerson)
+        if (!media.save()) {
+          println media.errors
+        }
+        return person.isOnWaitList(media)
+      }
+      else {
+        println waitingPerson.errors
+        return false
       }
     }
     else {
-      println waitingPerson.errors
+      return false
     }
-    println waitingPerson
-    println media.waitList*.waitingPeople
-    println media.waitList?.waitingPeople.find { it == waitingPerson }
-    return media.waitList?.waitingPeople.find { it == waitingPerson }
   }
 
   def removeFromWaitList(media, account) {
-    def waitList = WaitList.findByMediaAndAccount(media, account)
-    waitList.delete()
+    if (media && media.waitList && account) {
+      def waitingPerson = WaitingPerson.findByWaitListAndAccount(media.waitList, account)
+      deleteWaitingPerson(waitingPerson)
 
-    if (WaitList.countByMedia(media) > 0) {
-      updateWaitListPositions(media)
-      reserveFromWaitList(media)
-    }
-    else {
-      media.isAvailable = true
+      if (media.waitList.waitingPeople.size() > 0) {
+        updateWaitListPositions(media.wiatList)
+        if (reserveFromWaitList(media)) {
+          return true
+        }
+        else {
+          return false
+        }
+      }
+      else {
+        return true
+      }
     }
   }
 
-  def updateWaitListPositions(media) {
-    def waitLists = WaitList.findAllByMedia(media)
-    waitLists.sort { it.position }
+  def updateWaitListPositions(waitList) {
+    def waitingPeople = waitList.waitingPeople.sort { it.positionInLine }
     def count = 0
-    waitLists.each {
-      it.position = count++
+    waitingPeople.each {
+      it.positionInLine = count++
       it.save()
     }
+  }
+
+  def deleteWaitingPerson(waitingPerson) {
+    def waitList = waitingPerson.waitList
+    waitList.removeFromWaitingPeople(waitingPerson)
+    if (waitingPerson.delete()) {
+      waitList.save()
+    }
+
   }
 
   private createReservationList(account) {

@@ -9,6 +9,7 @@ class Media {
   String description
   Boolean isAvailable = true
   WaitList waitList
+  String coverArtLocation
 
   static constraints = {
     artist(nullable: true, blank: false)
@@ -18,15 +19,11 @@ class Media {
     description(nullable: true, blank: true)
     isAvailable(nullable: false)
     waitList(nullable: true)
+    coverArtLocation(nullable: true)
   }
 
   def estimatedWait() {
-    if(waitList){
-      return "${waitList.getLastPosition()} weeks"
-    }
-    else {
-      return ""
-    }
+    return "${waitList?.getLastPosition() ?: 1} weeks"
   }
 }
 
@@ -37,9 +34,9 @@ enum MediaType {
 enum MediaFormat {
 // PRINT
   PAPER, EPUB,
-// AUDIO
+  // AUDIO
   CD, MP3,
-// VIDEO
+  // VIDEO
   DVD, AVI
 }
 

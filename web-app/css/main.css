@@ -42,7 +42,7 @@
     position: relative;
     height: 400px;
     width: 100%;
-    top: 10%; /*left: 10%;*/
+    top: 10%;
 }
 
 #side .search input {
@@ -60,18 +60,8 @@
 #side .search li {
     position: relative;
     list-style-type: none;
-    display: inline-block; /*font-size: 14px;*/
+    display: inline-block;
 }
-
-/*#side .search ul.filters {*/
-/*position: relative;*/
-/*background: white;*/
-/*}*/
-
-/*#side .search ul.filters li {*/
-/*position: relative;*/
-/*background: blue;*/
-/*}*/
 
 #side .search ul.filters input {
     position: relative;
@@ -114,12 +104,13 @@
 }
 
 #wrapper form.login input[type=text],
-#wrapper form.login input[type=password]{
+#wrapper form.login input[type=password] {
     width: 120px;
 }
+
 #wrapper form.login input[type=password],
 #wrapper form.login input[type=submit],
-#wrapper form.login input[type=text]{
+#wrapper form.login input[type=text] {
     float: right;
 }
 
@@ -129,20 +120,20 @@
 }
 
 #wrapper form.account ul li {
-    position:relative;
-    display:inline-block;
+    position: relative;
+    display: inline-block;
     width: 40%;
-    margin:1px;
+    margin: 1px;
 }
 
 #wrapper form.account ul li.email {
-    position:relative;
-    display:inline-block;
+    position: relative;
+    display: inline-block;
     width: 80%;
 }
 
 #wrapper form.account ul li.email input {
-    position:relative;
+    position: relative;
     width: 89%;
 }
 
@@ -192,7 +183,7 @@
     -moz-border-radius: 15px 0 0 0;
     -webkit-border-radius: 15px 0 0 0;
     border-radius: 15px 0 0 0;
-    text-align:center;
+    text-align: center;
 }
 
 #header .nav ul a {
@@ -204,29 +195,10 @@
     border-radius: 0 0 0 0;
     background: transparent;
     text-decoration: none;
-    text-align:center;
-    line-height:13px;
+    text-align: center;
+    line-height: 13px;
 }
 
-/*
-#header .nav:hover {
-    background-color:lightgray;
-    float: right;
-    height: 42px;
-    width: 80px;
-    top:-17px;
-    left:0px;
-    text-decoration: none;
-    line-height: 40px;
-    padding: 0 10px 0 15px;
-    -moz-border-radius: 15px 0 0 15px;
-    -webkit-border-radius: 15px 0 0 15px;
-    border-radius: 15px 0 0 15px;
-    border-top: 2px solid black;
-    border-left: 2px solid black;
-    border-bottom: 2px solid black;
-}
-*/
 #header .nav.top a {
     position: relative;
     background-color: white;
@@ -255,75 +227,6 @@
     width: 100%;
 }
 
-/*#header .left {*/
-/*position: relative;*/
-/*background: gray url('../images/diamond.png') top left;*/
-/*min-width: 200px;*/
-/*width: 240px;*/
-/*border-right: 2px solid;*/
-/*border-bottom: 2px solid;*/
-/*height: 100%;*/
-/*}*/
-
-/*#header .right {*/
-/*position: absolute;*/
-/*height: 100%;*/
-/*width: 100%;*/
-/*border-left:2px solid;*/
-/*top: 0px;*/
-/*}*/
-
-/* ----- ALT DESIGN --------
-
-#side {
-   top: 60px;
-   border-top: 2px solid;
-   border-top-right-radius: 30px;
-   width: 15%
-}
-
-#wrapper {
-   border-left: 2px solid;
-   border-top: 2px solid;
-   top: 10%;
-   left: 15%;
-   border-top-left-radius: 30px;
-   width: 85%;
-   margin-left: 0;
-   position: fixed;
-}
-
-#header {
-   height: 10%;
-}
-
-#header .left {
-   position: relative;
-   height: 100%;
-   width: 15%;
-   float: left;
-   border-bottom: 2px solid;
-   border-right: 2px solid;
-   border-bottom-right-radius: 30px;
-   background-color: gray;
-}
-
-#header .right {
-   position: relative;
-   height: 100%;
-   width: 85%;
-   left: 0%;
-   float: left;
-   border-bottom: 2px solid;
-   border-right: 2px solid;
-   border-bottom-right-radius: 30px;
-   background-color: gray;
-}
-
-
-
-/* */
-
 ul.mediaList {
     position: relative;
     width: 100%;
@@ -341,40 +244,33 @@ ul.mediaList li.artist {
     position: relative;
     display: inline-block;
     width: 25%;
-    left: 40px; /*margin:-2px;*/
-/*padding:4px;*/
-/*border-bottom: 1px solid;*/
+    left: 40px;
 }
 
 ul.mediaList li.title {
     position: relative;
     display: inline-block;
     width: 65%;
-    left: 40px; /*margin:-2px;*/
-/*padding:4px;*/
-/*border-bottom: 1px solid;*/
+    left: 40px; 
 }
-
 
 #flashMessage {
     position: relative;
     background-color: yellow;
-    /*margin-left: 10%;*/
-    /*margin-right: 10%;*/
     border-bottom: 1px solid red;
-    text-align:center;
+    text-align: center;
     line-height: 20px;
 }
 
 ul.reservationList {
-    position:relative;
+    position: relative;
     width: 700px;
 }
 
 ul.reservationList li {
-    position:relative;
+    position: relative;
     display: inline-block;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 ul.reservationList li.title {
@@ -389,24 +285,11 @@ ul.reservationList li.return {
     width: 9%;
 }
 
-/*ul.reservationList li.title:nth-child(2n) {*/
-    /*background-color:gray;*/
-/*}*/
-
-/*ul.reservationList li.format:nth-child(2n) {*/
-    /*background-color:gray;*/
-/*}*/
-
-
-/*ul.reservationList li:nth-child(4n-1) {*/
-    /*background-color:gray;*/
-/*}*/
-
-/*ul.reservationList li:nth-child(4n) {*/
-    /*background-color:gray;*/
-/*}*/
-
-
+.coverArt {
+    postition: relative;
+    max-height: 300px;
+    max-width: 300px;
+}
 
 
 
