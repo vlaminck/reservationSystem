@@ -20,8 +20,8 @@ class RequestFilters {
                     if (userLogin) {
                       Person.currentUser = Person.findByUserLogin(userLogin)
                       if (Person.currentUser.account.failedLoginAttempts > 0) {
-                        Person.currentUser.account.failedLoginAttempts = 0
-                        Person.currentUser.account.save()
+//                        Person.currentUser.account.failedLoginAttempts = 0
+//                        Person.currentUser.account.save()
                       }
                     }
                     else {

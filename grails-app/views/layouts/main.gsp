@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page import="reservationsystem.Person" %>
 <html>
 <head>
   <title><g:layoutTitle default="Grails"/></title>
@@ -14,7 +15,15 @@
 <div id="header"><g:render template="/header"/></div>
 <div id="side"><g:render template="/side"/></div>
 <div id="wrapper">
-  <g:layoutBody/>
+  <g:if test="${Person.currentUser?.account?.isLocked}">
+    <h1>
+      Your account has been locked.
+    </h1>
+    <g:link controller="account" action="unlock">Click here to unlock</g:link>
+  </g:if>
+  <g:else>
+    <g:layoutBody/>
+  </g:else>
 </div>
 </body>
 </html>

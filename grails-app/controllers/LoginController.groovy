@@ -89,41 +89,56 @@ class LoginController {
    */
   def authfail = {
     println ""
-
+    def stopEverything = false
     def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
     println username
     def userLogin = UserLogin.findByUsername(username)
-    def person = Person.findByUserLogin(userLogin)
-    person.account.failedLoginAttempts++
-    person.account.save()
-    println person.account.failedLoginAttempts
+    if (userLogin) {
+      def person = Person.findByUserLogin(userLogin)
+      if (person) {
+        person.account.failedLoginAttempts++
+        person.account.save()
+        println person.account.failedLoginAttempts
+        if (person.account.isLocked) {
+          render {
+            h1("Your account has been locked.")
+            a(href:"${createLink(controller:'account', action:'unlock')}"){
+              div('Click here to unlock your account')
+            }
+          }
+          stopEverything = true
+        }
+      }
+    }
 
-    String msg = ''
-    def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
-    if (exception) {
-      if (exception instanceof AccountExpiredException) {
-        msg = SpringSecurityUtils.securityConfig.errors.login.expired
+    if (!stopEverything) {
+      String msg = ''
+      def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
+      if (exception) {
+        if (exception instanceof AccountExpiredException) {
+          msg = SpringSecurityUtils.securityConfig.errors.login.expired
+        }
+        else if (exception instanceof CredentialsExpiredException) {
+          msg = SpringSecurityUtils.securityConfig.errors.login.passwordExpired
+        }
+        else if (exception instanceof DisabledException) {
+          msg = SpringSecurityUtils.securityConfig.errors.login.disabled
+        }
+        else if (exception instanceof LockedException) {
+          msg = SpringSecurityUtils.securityConfig.errors.login.locked
+        }
+        else {
+          msg = SpringSecurityUtils.securityConfig.errors.login.fail
+        }
       }
-      else if (exception instanceof CredentialsExpiredException) {
-        msg = SpringSecurityUtils.securityConfig.errors.login.passwordExpired
-      }
-      else if (exception instanceof DisabledException) {
-        msg = SpringSecurityUtils.securityConfig.errors.login.disabled
-      }
-      else if (exception instanceof LockedException) {
-        msg = SpringSecurityUtils.securityConfig.errors.login.locked
+
+      if (springSecurityService.isAjax(request)) {
+        render([error: msg] as JSON)
       }
       else {
-        msg = SpringSecurityUtils.securityConfig.errors.login.fail
+        flash.message = msg
+        redirect action: auth, params: params
       }
-    }
-
-    if (springSecurityService.isAjax(request)) {
-      render([error: msg] as JSON)
-    }
-    else {
-      flash.message = msg
-      redirect action: auth, params: params
     }
   }
 
