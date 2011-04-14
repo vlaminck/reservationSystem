@@ -9,15 +9,15 @@ class Person {
   UserLogin userLogin
   Account account
 
-  static transients = ['currentUser']
+  static transients = ['currentUser', 'shortUsername']
 
   static belongsTo = [Account]
 
   static constraints = {
-    firstName(nullable: false, blank: false)
-    lastName(nullable: false, blank: false)
+    firstName(nullable: true, blank: false)
+    lastName(nullable: true, blank: false)
     email(nullable: false, blank: false, email:true)
-    phoneNumber(nullable: false, blank: false)
+    phoneNumber(nullable: true, blank: false)
     userLogin(nullable: false)
   }
 
@@ -54,6 +54,18 @@ class Person {
   def estimatedWait(media){
     def waitingPerson = WaitingPerson.findByAccountAndWaitList(account, media?.waitList)
     return waitingPerson?.estimatedWait()
+  }
+
+  def getShortUsername() {
+    if(firstName && lastName){
+      return "$firstName $lastName"
+    }
+    else if(firstName){
+      return "$firstName"
+    }
+    else {
+      return "${email.substring(0, email.indexOf('@'))}"
+    }
   }
 
 }

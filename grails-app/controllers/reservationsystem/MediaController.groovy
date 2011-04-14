@@ -6,11 +6,11 @@ class MediaController {
   def index = { }
 
   def show = {
-    def message = params.message ?: null
+    flash.message = params.message
     def media = Media.get(params.id)
     if (media) {
       def duplicates = Media.findAllByTitleAndType(media.title, media.type)
-      return [media: media, duplicates: duplicates, message: message, currentUser: Person.currentUser]
+      return [media: media, duplicates: duplicates, currentUser: Person.currentUser]
     }
     else {
       redirect(uri: "/")
@@ -56,7 +56,8 @@ class MediaController {
         }
       }
     }
-    redirect(action: 'show', id: media.id, params: ['message': reserveMessage])
+    flash.message = reserveMessage
+    redirect(action: 'show', id: media.id)
   }
 
   def returnMedia = {
@@ -65,7 +66,8 @@ class MediaController {
     if (media) {
       message = reserveService.returnMedia(media, Person.currentUser.account)
     }
-    redirect(controller: "account", action: "show", params: [message: message])
+    flash.message = message
+    redirect(controller: "account", action: "show")
   }
 
   def stopWaiting = {
@@ -76,6 +78,7 @@ class MediaController {
         message = "Successfully removed from wait list."
       }
     }
-    redirect(controller: "account", action: "show", params: [message: message])
+    flash.message = message
+    redirect(controller: "account", action: "show")
   }
 }

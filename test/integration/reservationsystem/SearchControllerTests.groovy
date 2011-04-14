@@ -67,12 +67,12 @@ class SearchControllerTests extends ControllerUnitTestCase {
     assertNull results.print
     assertNull results.audio
     assertNull results.video
-    assertEquals "Please refine your search", results.message
+    assertEquals "Please refine your search", controller.flash.message
   }
 
 
   void testResults_printTypeReturnsOnlyPrintType() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.type = "PRINT"
 
     def results = controller.results()
@@ -87,7 +87,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_audioTypeReturnsOnlyAudioType() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.type = "AUDIO"
 
     def results = controller.results()
@@ -102,7 +102,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_videoTypeReturnsOnlyVideoType() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.type = "VIDEO"
 
     def results = controller.results()
@@ -117,7 +117,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_paperFormatReturnsOnlyPaperFormat() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.format = "PAPER"
 
     def results = controller.results()
@@ -132,7 +132,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_epubFormatReturnsOnlyEpubFormat() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.format = "EPUB"
 
     def results = controller.results()
@@ -147,7 +147,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_cdFormatReturnsOnlyCdFormat() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.format = "CD"
 
     def results = controller.results()
@@ -162,7 +162,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_mp3FormatReturnsOnlyMp3Format() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.format = "MP3"
 
     def results = controller.results()
@@ -177,7 +177,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_dvdFormatReturnsOnlyDvdFormat() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.format = "DVD"
 
     def results = controller.results()
@@ -192,7 +192,7 @@ class SearchControllerTests extends ControllerUnitTestCase {
   }
 
   void testResults_aviFormatReturnsOnlyAviFormat() {
-    controller.params.query = "a"
+    controller.params.query = "as"
     controller.params.format = "AVI"
 
     def results = controller.results()

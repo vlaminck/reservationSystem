@@ -14,7 +14,7 @@ class Account {
 
   static constraints = {
     owner(nullable: false)
-    cardId(nullable: false)
+    cardId(nullable: true)
     reservationList(nullable: true)
   }
 

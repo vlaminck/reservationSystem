@@ -5,7 +5,7 @@
   <meta name="layout" content="main"/>
 </head>
 <body>
-Hello ${currentUser.firstName} ${currentUser.lastName},
+Hello ${currentUser.shortUsername},
 <g:if test="${account.fines}">
   <br/>
   <br/>

@@ -6,7 +6,7 @@ class SearchController {
   def index = {  }
 
   def results = {
-    if (params.type && params.format && params.query) {
+    if (params.type && params.format && params.query && params.query.length() > 1) {
       def message
       def results = [:]
       def searchTerms = params.query?.split(" ")
@@ -48,15 +48,15 @@ class SearchController {
       searchResults = searchResults.unique {a, b -> a.title <=> b.title}
       searchResults.each { media ->
         if (media.type == MediaType.PRINT) {
-          if(!results.print) results.print = []
+          if (!results.print) results.print = []
           results.print << media
         }
         else if (media.type == MediaType.AUDIO) {
-          if(!results.audio) results.audio = []
+          if (!results.audio) results.audio = []
           results.audio << media
         }
         else if (media.type == MediaType.VIDEO) {
-          if(!results.video) results.video = []
+          if (!results.video) results.video = []
           results.video << media
         }
       }
@@ -65,9 +65,11 @@ class SearchController {
         message = "Please refine your search"
       }
 
-      return [results: results, message: message]
+      flash.message = message
+      return [results: results]
     }
     else {
+      flash.message = "Please Refine your search"
       redirect(uri: "/")
     }
   }

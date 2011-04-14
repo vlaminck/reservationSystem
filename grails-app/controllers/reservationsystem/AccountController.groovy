@@ -26,8 +26,7 @@ class AccountController {
       return [
               currentUser: currentUser,
               account: account,
-              waitList: waitList,
-              message: params?.message
+              waitList: waitList
       ]
     }
     else {
@@ -36,7 +35,7 @@ class AccountController {
   }
 
   def create = {
-    return [message: params?.message]
+    return [:]
   }
 
   def save = {
@@ -66,7 +65,7 @@ class AccountController {
     if (account) {
       message = accountService.flagForDeletion(account)
     }
-    redirect(action: 'show', params: [message: message])
+    redirect(action: 'show')
   }
 
   def createAccount = {
@@ -85,7 +84,8 @@ class AccountController {
         redirectParams.message = message?.error
       }
     }
-    redirect(action: redirectAction, params: redirectParams)
+    flash.message = redirectParams?.message
+    redirect(action: redirectAction)
   }
 
   def fineMe = {
