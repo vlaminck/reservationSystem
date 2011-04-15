@@ -7,28 +7,14 @@ class BootStrap {
 
   def init = { servletContext ->
 
-    if (GrailsApplication.ENV_DEVELOPMENT == GrailsUtil.getEnvironment()) {
+    if (GrailsApplication.ENV_DEVELOPMENT == GrailsUtil.getEnvironment() || GrailsApplication.ENV_PRODUCTION == GrailsUtil.getEnvironment()) {
       println ' --- --- --- '
       println " Environment: ${GrailsUtil.getEnvironment()} ... Running BootStrap "
       println ' --- --- --- '
 
       createUsers()
       createMedia()
-      def fourHourBody = Print.findAllByArtist("Timothy Ferriss");
-      fourHourBody.each { fhb ->
-        fhb.coverArtLocation = "4-hour-body.jpeg"
-        fhb.save()
-      }
-      def mumfordAndSons = Audio.findAllByArtist("Mumford & Sons");
-      mumfordAndSons.each { ms ->
-        ms.coverArtLocation = "Mumfordsonssighnomore.jpg"
-        ms.save()
-      }
-      def inception = Video.findAllByTitle("Inception");
-      inception.each { i ->
-        i.coverArtLocation = "Inception.jpg"
-        i.save()
-      }
+      addImages()
 
     }
     else {
@@ -441,6 +427,28 @@ class BootStrap {
       ))
 
     }
+  }
+
+  def addImages(){
+    
+    def fourHourBody = Print.findAllByArtist("Timothy Ferriss");
+    fourHourBody.each { fhb ->
+      fhb.coverArtLocation = "4-hour-body.jpeg"
+      fhb.save()
+    }
+
+    def mumfordAndSons = Audio.findAllByArtist("Mumford & Sons");
+    mumfordAndSons.each { ms ->
+      ms.coverArtLocation = "Mumfordsonssighnomore.jpg"
+      ms.save()
+    }
+
+    def inception = Video.findAllByTitle("Inception");
+    inception.each { i ->
+      i.coverArtLocation = "Inception.jpg"
+      i.save()
+    }
+    
   }
 
   def saveDomain(domain) {
