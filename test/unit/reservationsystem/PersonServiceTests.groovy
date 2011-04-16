@@ -45,9 +45,6 @@ class PersonServiceTests extends GrailsUnitTestCase {
 
     assertNull service.savePerson(person, params)
 
-    println person.firstName
-    println person.lastName
-
     assertNotNull person.firstName
     assertNotNull person.lastName
   }

@@ -3,6 +3,7 @@ package reservationsystem
 class AccountController {
   def accountService
   def personService
+  def reserveService
   def springSecurityService
 
   static allowedMethods = [save: 'POST', createAccount: 'POST']
@@ -35,6 +36,9 @@ class AccountController {
   }
 
   def create = {
+    if (params.checkout) {
+      flash.checkout = true
+    }
     return [:]
   }
 
@@ -65,6 +69,7 @@ class AccountController {
     if (account) {
       message = accountService.flagForDeletion(account)
     }
+    flash.message = message
     redirect(action: 'show')
   }
 
@@ -76,7 +81,7 @@ class AccountController {
       def account = accountCreationMap.account
       def message = accountCreationMap.message
       if (account) {
-        redirectAction = 'show'
+        redirectAction = flash.checkout ? 'checkout' : 'show'
         redirectParams.message = message?.success
       }
       else {
@@ -104,6 +109,45 @@ class AccountController {
 
   def unlock = {
     // TODO: allow Brad to enter his name to unlock Person.currentUser
+  }
+
+  def cart = {
+    def mediaList = []
+    if (!session.shoppingCart) {
+      session.shoppingCart = []
+    }
+    session.shoppingCart.each { mediaId ->
+      mediaList << Media.get(mediaId)
+    }
+    return [currentUser: Person.currentUser, mediaList: mediaList]
+  }
+
+  def checkout = {
+    if (!session.shoppingCart) {
+      session.shoppingCart = []
+    }
+
+    def account = Person.currentUser?.account
+    def redirectAction = "cart"
+    def message
+    if (account) {
+      def cart = []
+      cart += session.shoppingCart
+      cart.each { mediaId ->
+        def media = Media.get(mediaId)
+        message = reserveService.reserve(media, account)
+        if (message.startsWith("Successfully")) {
+          session.shoppingCart.remove(mediaId)
+        }
+        if (!message.startsWith("Successfully")) {
+          flash.message = "There was an error reserving one or more of your items.\nPlease try again later."
+        }
+      }
+      if (!flash.message) {
+        redirectAction = "show"
+      }
+    }
+    redirect(action: redirectAction)
   }
 
 }

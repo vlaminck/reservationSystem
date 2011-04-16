@@ -13,7 +13,7 @@ class UserLoginService {
             enabled: true)
 
     if (!userLogin.save()) {
-      println userLogin.errors
+      log.debug userLogin.errors
       userLogin = null
     }
     else {

@@ -88,17 +88,14 @@ class LoginController {
    * Callback after a failed login. Redirects to the auth page with a warning message.
    */
   def authfail = {
-    println ""
     def stopEverything = false
     def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
-    println username
     def userLogin = UserLogin.findByUsername(username)
     if (userLogin) {
       def person = Person.findByUserLogin(userLogin)
       if (person) {
         person.account.failedLoginAttempts++
         person.account.save()
-        println person.account.failedLoginAttempts
         if (person.account.isLocked) {
           render {
             h1("Your account has been locked.")

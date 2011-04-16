@@ -23,15 +23,12 @@ class ReserveService {
     else {
       message = "You dan't have permission to reserve."
     }
-    return message ?: "Susccessfully Reserved ${media.title}"
+    return message ?: "Successfully Reserved ${media.title}"
   }
 
   def returnMedia(media, account) {
     def message
-    println account
-    println account.reservationList
     def reservation = account.reservationList.reservations.find {it.media == media}
-    println reservation
     account.reservationList.removeFromReservations(reservation)
     if (!reservation.delete()) {
       log.warn "Unable to delete reservation $reservation, ${reservation.errors}"
@@ -40,7 +37,6 @@ class ReserveService {
     media.save()
     account.reservationList.save()
     account.save(flush: true)
-    println account.reservationList.reservations*.media
 
     return "Successfully returned ${media.title}"
   }
@@ -65,28 +61,24 @@ class ReserveService {
   }
 
   def addToWaitList(media, person) {
-    // TODO: remove println's
-    println ""
     if (!media.waitList) {
       media.waitList = new WaitList(media: media).save()
       if (!media.save()) {
-        println media.errors
+        log.debug media.errors
       }
     }
-    println media.waitList
-    println media.waitList?.waitingPeople
     if (!person.isOnWaitList(media)) {
       def position = media.waitList?.getLastPosition() ?: 0
       def waitingPerson = new WaitingPerson(account: person.account, media: media, positionInLine: position, waitList: media.waitList)
       if (waitingPerson.save()) {
         media.waitList?.addToWaitingPeople(waitingPerson)
         if (!media.save()) {
-          println media.errors
+          log.debug media.errors
         }
         return person.isOnWaitList(media)
       }
       else {
-        println waitingPerson.errors
+        log.debug waitingPerson.errors
         return false
       }
     }

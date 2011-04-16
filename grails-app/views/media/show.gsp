@@ -27,6 +27,15 @@
                 <g:link controller="media" action="reserve" id="${duplicate.id}" method="POST">
                   Reserve ${duplicate.format.toString().toLowerCase()} format
                 </g:link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <g:if test="${session.shoppingCart?.contains(duplicate.id.toString())}">
+                  Currently in your cart
+                </g:if>
+                <g:else>
+                  <g:link controller="media" action="addToShoppingCart" id="${duplicate.id}" method="POST">
+                    Add to shopping Cart
+                  </g:link>
+                </g:else>
               </g:if>
               <g:elseif test="${currentUser?.isOnWaitList(duplicate)}">
                 You are on the wait list for the ${duplicate.format.toString().toLowerCase()} format of this book.<br/>

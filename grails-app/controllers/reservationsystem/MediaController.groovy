@@ -6,7 +6,6 @@ class MediaController {
   def index = { }
 
   def show = {
-    flash.message = params.message
     def media = Media.get(params.id)
     if (media) {
       def duplicates = Media.findAllByTitleAndType(media.title, media.type)
@@ -40,15 +39,12 @@ class MediaController {
     def media = Media.get(params.id)
     def currentUser = Person.currentUser
 
-    // TODO: remove println's
-    println currentUser
-    println currentUser.canReserveMedia()
-    println !currentUser.hasMaterialReserved(media)
-    println (currentUser && currentUser.canReserveMedia() && !currentUser.hasMaterialReserved(media))
     if (currentUser && currentUser.canReserveMedia() && !currentUser.hasMaterialReserved(media)) {
-      println media.isAvailable
       if (media.isAvailable) {
         reserveMessage = reserveService.reserve(media, Person.currentUser.account)
+        if (reserveMessage.startsWith("Successfully") && session.shoppingCart?.contains(media.id.toString())) {
+          session.shoppingCart.remove(media.id.toString())
+        }
       }
       else {
         if (reserveService.addToWaitList(media, Person.currentUser)) {
@@ -74,11 +70,51 @@ class MediaController {
     def media = Media.get(params.id)
     def message = "Unable to remove you from wait list.\nPlease try again later."
     if (media) {
-      if(reserveService.removeFromWaitList(media, Person.currentUser.account)){
+      if (reserveService.removeFromWaitList(media, Person.currentUser.account)) {
         message = "Successfully removed from wait list."
       }
     }
     flash.message = message
     redirect(controller: "account", action: "show")
   }
+
+  def addToShoppingCart = {
+    def media = Media.get(params.id)
+
+    if (!session.shoppingCart) {
+      session.shoppingCart = [params.id]
+      flash.message = "${media.title} \nhas been added to your cart"
+    }
+    else if (!session.shoppingCart.contains(params.id)) {
+      session.shoppingCart << params.id
+      flash.message = "${media.title} \nhas been added to your cart"
+    }
+    else {
+      flash.message = "${media.title} \nis already in your cart."
+    }
+    session.shoppingCart.unique()
+
+    redirect(action: "show", id: params.id)
+  }
+
+  def removeFromShoppingCart = {
+    def media = Media.get(params.id)
+    if (!session.shoppingCart) {
+      session.shoppingCart = []
+    }
+
+    if (!session.shoppingCart.contains(params.id)) {
+      flash.message = "${media.title} \nis not in your cart"
+    }
+    else {
+      session.shoppingCart.remove(params.id)
+      flash.message = "${media.title} \nhas been removed from your cart."
+    }
+
+    if (session.shoppingCart.size() > 0) {
+      redirect(controller: "account", action: "cart")
+    }
+    redirect(action: "show", id: params.id)
+  }
+
 }

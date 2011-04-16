@@ -47,7 +47,6 @@ class Person {
 
   Boolean isOnWaitList(media) {
     def waitingPerson = WaitingPerson.findByAccountAndWaitList(account, media?.waitList)
-    println "waitingPerson: $waitingPerson"
     return waitingPerson ? true : false
   }
 

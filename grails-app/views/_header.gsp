@@ -8,10 +8,13 @@
     <g:link controller="account" action="create">Create Account</g:link>
   </g:else>
   <ul class="open">
-    <g:if test="${Person.currentUser}"><li><g:link controller="logout">Logout</g:link></li></g:if>
+    <g:if test="${Person.currentUser}">
+      <li><g:link controller="logout">Logout</g:link></li>
+      <li><g:link controller="account" action="cart">View Cart</g:link></li>
+    </g:if>
     <g:else>
       <li><g:link controller="login" action="auth">Log in</g:link></li>
-      <li><g:link controller="Account" action="create">Create Account</g:link></li>
+      <li><g:link controller="account" action="cart">View Cart</g:link></li>
     </g:else>
   </ul>
 </div>

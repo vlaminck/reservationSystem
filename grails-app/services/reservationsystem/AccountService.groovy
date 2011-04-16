@@ -26,13 +26,13 @@ class AccountService {
       account.owner = user
 
       if (!user.save()) {
-        println user.errors
+        log.debug user.errors
         // TODO: better error handling
         message.error = 'Unable to create new user'
         account = null
       }
       else if (!account.save()) {
-        println account.errors
+        log.debug account.errors
         //TODO: better errorHandling
         message.error = 'Unable to create new account'
         account = null
