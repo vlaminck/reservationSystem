@@ -107,10 +107,6 @@ class AccountController {
     return [:]
   }
 
-  def unlock = {
-    // TODO: allow Brad to enter his name to unlock Person.currentUser
-  }
-
   def cart = {
     def mediaList = []
     if (!session.shoppingCart) {

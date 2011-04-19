@@ -64,7 +64,7 @@ class BootStrap {
             lastName: 'Bauer',
             email: 'foo@bar.com',
             phoneNumber: '1',
-            userLogin: adminUser,
+            userLogin: david,
             account: davidAccount
     )
     davidAccount.owner = davidPerson
@@ -84,7 +84,7 @@ class BootStrap {
             lastName: 'Knutson',
             email: 'foo@bar.com',
             phoneNumber: '1',
-            userLogin: adminUser,
+            userLogin: erik,
             account: erikAccount
     )
     erikAccount.owner = erikPerson

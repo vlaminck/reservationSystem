@@ -19,10 +19,10 @@ class RequestFilters {
                     def userLogin = UserLogin.get(userDetails?.id)
                     if (userLogin) {
                       Person.currentUser = Person.findByUserLogin(userLogin)
-                      if (Person.currentUser?.account?.failedLoginAttempts > 0) {
+//                      if (Person.currentUser?.account?.failedLoginAttempts > 0) {
 //                        Person.currentUser.account.failedLoginAttempts = 0
 //                        Person.currentUser.account.save()
-                      }
+//                      }
                     }
                     else {
                       log.warn("Found UserDetails: ${userDetails} with no userLogin for ID: ${userDetails?.id}")
