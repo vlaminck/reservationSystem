@@ -15,6 +15,7 @@ class AccountServiceTests extends GrailsUnitTestCase {
     mockDomain(Account)
     mockDomain(Person)
 
+    AccountService.metaClass.getLog = { -> [info:{}, warn:{}, debug:{}, error:{}] }
     service = new AccountService()
     service.userLoginService = [createLogin:{params ->
       return TestFixtures.userLogin()
@@ -30,6 +31,8 @@ class AccountServiceTests extends GrailsUnitTestCase {
 
   protected void tearDown() {
     super.tearDown()
+    def remove = GroovySystem.metaClassRegistry.&removeMetaClass
+    remove AccountService
   }
 
   void testCreateAccount_noUserLoginReturnsNullAccount() {
@@ -79,8 +82,8 @@ class AccountServiceTests extends GrailsUnitTestCase {
     assertEquals "Unable to create new account", retMap.message.error
   }
 
-  void xtestCreateAccount_personSaveErrorReturnsNullAcountAndErrorMessage() {
-    params.firstName = null
+  void testCreateAccount_personSaveErrorReturnsNullAcountAndErrorMessage() {
+    params.email = null
 
     def retMap = service.createAccount(params)
 
@@ -104,9 +107,9 @@ class AccountServiceTests extends GrailsUnitTestCase {
     assertTrue person.account.flagForDeletion
   }
 
-  void xtestFlagForDeletion_accountSaveErrorDoesNotflagAccountForDeletion() {
+  void testFlagForDeletion_accountSaveErrorDoesNotflagAccountForDeletion() {
     person = TestFixtures.person()
-    person.account.cardId = null // forces account save to fail
+    person.account.owner = null // forces account save to fail
     assertFalse person.account.flagForDeletion
 
     def message = service.flagForDeletion(person.account)

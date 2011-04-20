@@ -49,27 +49,20 @@ class AccountControllerTests extends ControllerUnitTestCase {
     assertEquals 'create', controller.redirectArgs.action
   }
 
-  void xtestShow_returnsMessageFromParams() {
-    Person.currentUser = person
-    controller.params.message = 'this string should be returned'
+  void testShow_noCurrentUserRedirectsHome() {
+    Person.currentUser = null
 
-    def retMap = controller.show()
-
-    assertEquals 'this string should be returned', controller.flash.message
-  }
-
-  void xtestShow_noCurrentUserRedirectsHome() {
     controller.show()
 
     assertEquals '/', controller.redirectArgs.uri
   }
 
-  void xtestCreate_returnsMessageFromParams() {
-    controller.params.message = 'this string should be returned'
+  void testCreate_accountCreatedDuringCheckoutPassedTrueInFlashScope() {
+    controller.params.checkout = true
 
     def retMap = controller.create()
 
-    assertEquals 'this string should be returned', controller.flash.message    
+    assertTrue controller.flash.checkout
   }
 
   void testSave_noCurrentUserRedirectsHome() {
@@ -114,13 +107,13 @@ class AccountControllerTests extends ControllerUnitTestCase {
     assertEquals person, retMap.person
   }
 
-  void xtestDelete_noCurrentUserRedirectsWithMessage() {
+  void testDelete_noCurrentUserRedirectsWithMessage() {
     controller.delete()
 
-    assertEquals "Couldn't find your account", controller.redirectArgs.params.message
+    assertEquals "Couldn't find your account", controller.flash.message
   }
 
-  void xtestDelete_redirectsWithMessage() {
+  void testDelete_redirectsWithMessage() {
     Person.currentUser = person
     controller.accountService = [flagForDeletion: {acc ->
       return "this should be returned"
@@ -148,7 +141,7 @@ class AccountControllerTests extends ControllerUnitTestCase {
     assertEquals 'create', controller.redirectArgs.action    
   }
 
-  void xtestCreateAccount_serviceReturnsAccountAndMessageRedirectsToShow() {
+  void testCreateAccount_serviceReturnsAccountAndMessageRedirectsToShow() {
     controller.params.password = 'pass'
     controller.params.confirmPassword = 'pass'
     controller.accountService = [createAccount:{p->
@@ -157,7 +150,7 @@ class AccountControllerTests extends ControllerUnitTestCase {
 
     controller.createAccount()
 
-    assertEquals 'this should be returned', controller.redirectArgs.params.message
+    assertEquals 'this should be returned', controller.flash.message
     assertEquals 'show', controller.redirectArgs.action
   }
 

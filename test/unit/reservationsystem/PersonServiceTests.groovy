@@ -38,14 +38,11 @@ class PersonServiceTests extends GrailsUnitTestCase {
     assertNull service.savePerson(null, null)
   }
 
-  void xtestSavePerson_personSaveFailureReturnsNull() {
-    def params = [firstName: null, lastName: null]
+  void testSavePerson_personSaveFailureReturnsNull() {
+    def params = [email: null]
     assertFalse person.firstName == params.firstName
     assertFalse person.lastName == params.lastName
 
     assertNull service.savePerson(person, params)
-
-    assertNotNull person.firstName
-    assertNotNull person.lastName
   }
 }
