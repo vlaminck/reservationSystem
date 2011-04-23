@@ -6,7 +6,7 @@ class Print extends Media {
     String isbn
 
     static constraints = {
-        pulisher(nullable: true, blank: true)
+        publisher(nullable: true, blank: true)
         isbn(nullable: true, blank: true)
     }
 }
