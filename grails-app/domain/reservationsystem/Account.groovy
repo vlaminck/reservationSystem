@@ -34,7 +34,7 @@ class Account {
     }
 
     def getIsLocked() {
-        return failedLoginAttempts >= 5
+        return failedLoginAttempts >= 5 || flagForDeletion
     }
 
     def setIsLocked() {

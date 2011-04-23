@@ -236,7 +236,7 @@ class AccountControllerTests extends ControllerUnitTestCase {
     assertEquals "You must log in", controller.flash.message
   }
 
-  void testCheckout_successfulReservationEmptiesCart() {
+  void testCheckout_successfulReservationEmptiesCartAndRedirectsToShow() {
     Person.currentUser = person
     def cartMedia = createAndFillCart()
     assertNotNull controller.session.shoppingCart
@@ -250,6 +250,7 @@ class AccountControllerTests extends ControllerUnitTestCase {
     controller.checkout()
 
     assertEquals 0, controller.session.shoppingCart.size()
+    assertEquals "show", controller.redirectArgs.action
   }
 
   void testCheckout_unSuccessfulReservationDoesNotRemoveItemFromCart() {
