@@ -6,6 +6,8 @@ class SecUserSecRole implements Serializable {
 
 	UserLogin secUser
 	SecRole secRole
+    Date dateCreated
+    Date lastUpdated
 
 	boolean equals(other) {
 		if (!(other instanceof SecUserSecRole)) {

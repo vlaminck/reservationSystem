@@ -119,28 +119,33 @@ class AccountController {
   }
 
   def checkout = {
+    def redirectAction = "cart"
     if (!session.shoppingCart) {
       session.shoppingCart = []
+      flash.message = "Your cart was empty"
     }
-
-    def account = Person.currentUser?.account
-    def redirectAction = "cart"
-    def message
-    if (account) {
-      def cart = []
-      cart += session.shoppingCart
-      cart.each { mediaId ->
-        def media = Media.get(mediaId)
-        message = reserveService.reserve(media, account)
-        if (message.startsWith("Successfully")) {
-          session.shoppingCart.remove(mediaId)
+    else {
+      def account = Person.currentUser?.account
+      def message
+      if (account) {
+        def cart = []
+        cart += session.shoppingCart
+        cart.each { mediaId ->
+          def media = Media.get(mediaId)
+          message = reserveService.reserve(media, account)
+          if (message.startsWith("Successfully")) {
+            session.shoppingCart.remove(mediaId)
+          }
+          if (!message.startsWith("Successfully")) {
+            flash.message = "There was an error reserving one or more of your items.\nPlease try again later."
+          }
         }
-        if (!message.startsWith("Successfully")) {
-          flash.message = "There was an error reserving one or more of your items.\nPlease try again later."
+        if (!flash.message) {
+          redirectAction = "show"
         }
       }
-      if (!flash.message) {
-        redirectAction = "show"
+      else {
+        flash.message = "You must log in"
       }
     }
     redirect(action: redirectAction)

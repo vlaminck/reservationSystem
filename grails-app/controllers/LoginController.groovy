@@ -98,6 +98,7 @@ class LoginController {
         person.account.save()
         if (person.account.isLocked) {
           render {
+            head(){}
             h1("Your account has been locked.")
             a(href:"${createLink(controller:'account', action:'unlock')}"){
               div('Click here to unlock your account')

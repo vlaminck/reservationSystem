@@ -2,12 +2,15 @@ package reservationsystem
 
 class ReservationList {
 
-  static hasMany = [reservations: Reservation]
+    Date dateCreated
+    Date lastUpdated
 
-  static constraints = {
-  }
+    static hasMany = [reservations: Reservation]
 
-  def canReserveMedia() {
-    return reservations ? reservations.size() < 5 : true
-  }
+    static constraints = {
+    }
+
+    def canReserveMedia() {
+        return reservations ? reservations.size() < 5 : true
+    }
 }

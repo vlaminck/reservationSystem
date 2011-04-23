@@ -2,22 +2,24 @@ package reservationsystem
 
 class WaitingPerson {
 
-  WaitList waitList
-  Integer positionInLine
-  Account account
+    WaitList waitList
+    Integer positionInLine
+    Account account
+    Date dateCreated
+    Date lastUpdated
 
-  static belongsTo = [WaitList]
+    static belongsTo = [WaitList]
 
-  static constraints = {
-    waitList(nullable: false)
-    account(nullable: false)
-    positionInLine(nullable: true)
-  }
+    static constraints = {
+        waitList(nullable: false)
+        account(nullable: false)
+        positionInLine(nullable: true)
+    }
 
-  def estimatedWait() {
-    if (!positionInLine) positionInLine = 0
-    def offset = positionInLine + 1
-    def plural = offset != 1 ? 's' : ''
-    return "$offset week$plural"
-  }
+    def estimatedWait() {
+        if (!positionInLine) positionInLine = 0
+        def offset = positionInLine + 1
+        def plural = offset != 1 ? 's' : ''
+        return "$offset week$plural"
+    }
 }

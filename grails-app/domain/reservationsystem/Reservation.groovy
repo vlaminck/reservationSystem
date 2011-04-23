@@ -2,10 +2,12 @@ package reservationsystem
 
 class Reservation {
 
-  Media media
+    Media media
+    Date dateCreated
+    Date lastUpdated
 
-  static belongsTo = [ReservationList]
+    static belongsTo = [ReservationList]
 
-  static constraints = {
-  }
+    static constraints = {
+    }
 }
